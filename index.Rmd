@@ -64,7 +64,7 @@ The above mentioned, the case study of infrastructure should be USA because the 
 
 13. What is the proportion of total basic infrastructure investment in all category infrastructure?
 
-14. **How does basic infrastructure investment affect Implicit Price Deflators (IPDs)?**
+14. **How does changing of basic infrastructure investment (million dollar) similar/different with Implicit Price Deflators  (IPDs) of basic infrastructure investment?**
 
 15. What are the trends in all categories infrastructure investment so far?
 
@@ -84,7 +84,7 @@ The above mentioned, the case study of infrastructure should be USA because the 
 
 In question 6: We expect the positive relationship between total data investment and GDP. Moreover we expect to see the steep line from 1900 to 2017.
 
-In question 14:
+In question 14: We expect the results should be the same or slightly difference.
 
 # Analysis and findings
 
