@@ -12,6 +12,13 @@ output:
 
 [This assignment is for ETC5521 Assignment 1 by Team `r rmarkdown::metadata$team` comprising of `r knitr::combine_words(rmarkdown::metadata$author)`.]{style="color:#006DAE;"}
 
+```{r}
+investment <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-08-10/investment.csv')
+chain_investment <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-08-10/chain_investment.csv')
+ipd <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-08-10/ipd.csv')
+
+```
+
 
 # Introduction and motivation
 
@@ -23,7 +30,33 @@ output:
 
 # Questions of interest
 
-[FILL] What questions might be possible to answer with this data, aiming for about 20. Bold the 3-4 questions you will address in the analysis
+[FILL] What questions might be possible to answer with this data, aiming for about 20. Bold the 3-4 questions you will address in the 
+
+1. What category of investment is the highest average gross investment and Chain? Does it same?
+
+2. What is the trend of total basic infrastructure?
+
+3. what is the trend of total social infrastructure?
+
+4. What year and category are the highest investment and Chain?
+
+5. What year and category are the lowest investment and Chain?
+
+**6. What is the relationship between total digital investment and gdp?** (download gdp from other and join it later)
+
+**7. What are the effects of Air, Water, Rail transportation investment to GDP?** (same with 9)
+
+8. What are the similarities/difference of trend between Federal electric power structures investment and Private electric power structures investment?
+
+9. How does the digital investment change? (ipd) it will show the changing of price base on based year (2012)
+
+10. How does the transportation investment change? (ipd) it will show the changing of price base on based year (2012)
+
+11. How does the power investment change? (ipd) it will show the changing of price base on based year (2012)
+
+12. Between private and federal, which sector invest in infrastructural investment more? 
+
+13. **How does the health investment affect to mortality ?**
 
 # Expected findings
 
