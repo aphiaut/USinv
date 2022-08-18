@@ -58,6 +58,20 @@ ipd <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytu
 
 13. **How does the health investment affect to mortality ?**
 
+14. How does basic infrastructure investment affect Implicit Price Deflators (IPDs)?
+
+15. What are the trends in all categories infrastructure investment so far?
+
+16. In 2012, what is the proportion of various investments in the total investment？
+
+17. What category of investment has the greatest impact on GDP and how?
+
+18. What is the relationship between GDP and private investment？
+
+19. What is the relationship between GDP and federal investment？
+
+20. Is there a linear relationship between GDP and total basic infrastructure investment? Positive or negative?
+
 # Expected findings
 
 [FILL] For your chosen questions explain what you think you might find.
