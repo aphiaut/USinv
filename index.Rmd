@@ -3,7 +3,7 @@ title: "ETC5521 Assignment 1"
 subtitle: "Your title"
 team: [FILL]
 author:
-  - [FILL]
+  - [Aphiaut Imuan]
   - [FILL]
 date: "`r Sys.Date()`"
 output: 
@@ -24,6 +24,11 @@ ipd <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytu
 
 [FILL] Give the bigger picture of the data, and inspire the reader to learn more about the problem by reading your analysis. 
 
+Infrastructure investment is an important core of the country. It includes federal investments such as water suppliers and a private sector investment that manages electricity. It also includes the cost of research and development in technology.
+
+Moreover, infrastructure investment plays a role in supporting both businesses and households. For example, the development of logistics has resulted in businesses reducing transportation costs. Households can access infrastructure services and can choose to use them. It also has a positive effect on both short-term and long-term economic growth [(Stupak, 2017)](https://ecommons.cornell.edu/bitstream/handle/1813/78289/CRS_Economic_Impact_of_Infrastructure_Investment_0717.pdf?sequence=1&isAllowed=y).
+
+The above mentioned, the case study of infrastructure should be USA because the USA is a big country, has a large population, and people can access infrastructure services. Furthermore, the USA is also the world's largest economy. 
 
 # Data description
 
@@ -76,6 +81,10 @@ ipd <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytu
 # Expected findings
 
 [FILL] For your chosen questions explain what you think you might find.
+
+In question 6: We expect the positive relationship between total data investment and GDP. Moreover we expect to see the steep line from 1900 to 2017.
+
+In question 14:
 
 # Analysis and findings
 
