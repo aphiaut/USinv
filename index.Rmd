@@ -12,6 +12,18 @@ output:
 
 [This assignment is for ETC5521 Assignment 1 by Team `r rmarkdown::metadata$team` comprising of `r knitr::combine_words(rmarkdown::metadata$author)`.]{style="color:#006DAE;"}
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      message = FALSE, 
+                      warning = FALSE)
+library(tidyverse)
+library(ggplot2)
+library(knitr)
+library(lubridate)
+library(sf)
+library(kableExtra)
+```
+
 ```{r}
 investment <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-08-10/investment.csv')
 chain_investment <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-08-10/chain_investment.csv')
@@ -32,7 +44,53 @@ The above mentioned, the case study of infrastructure should be USA because the 
 
 # Data description
 
-[FILL] Source of the data, and detail the structure of the data
+
+The data comes from [Bureau of Economic Analysis](https://www.bea.gov/system/files/papers/BEA-WP2020-12.pdf). The raw .xlsx file is included, or can be downloaded directly from the [BEA Working paper series](https://www.bea.gov/system/files/2021-01/infrastructure-data-may-2020.xlsx).
+
+The 3 primary data sets are already cleaned and saved as .csv files.
+
+The structure of the 3 data sets are shown below.
+
+#### **investment.csv:**
+
+```{r, echo=FALSE}
+variable <- c("category","meta_cat","group_num","year","gross_inv")
+description <- c("Category of investment",
+                 "Group category of investment",
+                 "Group number of investment",
+                 "Year of investment",
+                 "Gross investment in millions of USD")
+invest_dic <- data.frame(variable, description) %>%
+  mutate(class = map(investment,typeof)) %>% 
+  select(variable,class,description)
+kable(invest_dic,
+      align = "lll","pipe")
+```
+
+#### **chain_investment.csv:**
+
+```{r, echo=FALSE}
+variable <- c("category","meta_cat","group_num","year","gross_inv_chain")
+description <- c(
+```
+
+#### **ipd.csv:**
+
+```{r, echo=FALSE}
+variable <- c("category","meta_cat","group_num","year","gross_inv_ipd")
+description <- c("Category of investment",
+                 "Group category of investment",
+                 "Group number of investment",
+                 "Year of investment",
+                 "Implicit Price Deflators (IPDs) An implicit price deflator is the ratio of the current-dollar value of a series, such as gross domestic product (GDP), to its corresponding chained-dollar value, multiplied by 100.")
+ipd_dic <- data.frame(variable, description) %>%
+  mutate(class = map(ipd,typeof)) %>% 
+  select(variable,class,description)
+kable(ipd_dic,
+      align = "lll","pipe")
+```
+
+
 
 # Questions of interest
 
