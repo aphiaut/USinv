@@ -374,9 +374,6 @@ pre code {
 <p><span style="color:#006DAE;">This assignment is for ETC5521
 Assignment 1 by Team FILL comprising of Aphiaut Imuan and
 FILL.</span></p>
-<pre class="r"><code>investment &lt;- readr::read_csv(&#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-08-10/investment.csv&#39;)
-chain_investment &lt;- readr::read_csv(&#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-08-10/chain_investment.csv&#39;)
-ipd &lt;- readr::read_csv(&#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-08-10/ipd.csv&#39;)</code></pre>
 <div id="introduction-and-motivation" class="section level1">
 <h1>Introduction and motivation</h1>
 <p>[FILL] Give the bigger picture of the data, and inspire the reader to
@@ -402,17 +399,22 @@ largest economy.</p>
 of Economic Analysis</a>. The raw .xlsx file is included, or can be
 downloaded directly from the <a href="https://www.bea.gov/system/files/2021-01/infrastructure-data-may-2020.xlsx">BEA
 Working paper series</a>.</p>
-<p>The 3 primary data sets are already cleaned and saved as .csv
-files.</p>
-<p>The structure of the 3 data sets are shown below.</p>
-<div id="investment.csv" class="section level4">
-<h4><strong>investment.csv:</strong></h4>
+<p>The 3 primary data sets are already cleaned and saved as .csv files
+and they all have five variables. Of these, the four variables are the
+same as below.</p>
 <table>
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="32%" />
+<col width="45%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">variable</th>
 <th align="left">class</th>
 <th align="left">description</th>
+<th align="left">e.g.</th>
 </tr>
 </thead>
 <tbody>
@@ -420,40 +422,35 @@ files.</p>
 <td align="left">category</td>
 <td align="left">character</td>
 <td align="left">Category of investment</td>
+<td align="left">Private,Federal…</td>
 </tr>
 <tr class="even">
 <td align="left">meta_cat</td>
 <td align="left">character</td>
 <td align="left">Group category of investment</td>
+<td align="left">Total infrastructure,Water supply,GDP…</td>
 </tr>
 <tr class="odd">
 <td align="left">group_num</td>
 <td align="left">double</td>
 <td align="left">Group number of investment</td>
+<td align="left">1,2,3…</td>
 </tr>
 <tr class="even">
 <td align="left">year</td>
 <td align="left">double</td>
 <td align="left">Year of investment</td>
-</tr>
-<tr class="odd">
-<td align="left">gross_inv</td>
-<td align="left">double</td>
-<td align="left">Gross investment in millions of USD</td>
+<td align="left">1947,1948,1949…</td>
 </tr>
 </tbody>
 </table>
-</div>
-<div id="chain_investment" class="section level4">
-<h4><strong>chain_investment:</strong></h4>
-</div>
-<div id="ipd.csv" class="section level4">
-<h4><strong>ipd.csv:</strong></h4>
+<p>The 3 data sets record the gross investment, chained investment in
+USD and Implicit Price Deflators (IPDs) respectively.</p>
 <table>
 <colgroup>
-<col width="5%" />
-<col width="4%" />
-<col width="89%" />
+<col width="6%" />
+<col width="2%" />
+<col width="90%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -464,24 +461,15 @@ files.</p>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">category</td>
-<td align="left">character</td>
-<td align="left">Category of investment</td>
+<td align="left">gross_inv</td>
+<td align="left">double</td>
+<td align="left">Gross investment in millions of USD</td>
 </tr>
 <tr class="even">
-<td align="left">meta_cat</td>
-<td align="left">character</td>
-<td align="left">Group category of investment</td>
-</tr>
-<tr class="odd">
-<td align="left">group_num</td>
+<td align="left">gross_inv_chain</td>
 <td align="left">double</td>
-<td align="left">Group number of investment</td>
-</tr>
-<tr class="even">
-<td align="left">year</td>
-<td align="left">double</td>
-<td align="left">Year of investment</td>
+<td align="left">Gross investment (chained 2021 dollars) in millions of
+USD</td>
 </tr>
 <tr class="odd">
 <td align="left">gross_inv_ipd</td>
@@ -493,7 +481,6 @@ multiplied by 100.</td>
 </tr>
 </tbody>
 </table>
-</div>
 </div>
 <div id="questions-of-interest" class="section level1">
 <h1>Questions of interest</h1>

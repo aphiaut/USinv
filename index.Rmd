@@ -24,7 +24,7 @@ library(sf)
 library(kableExtra)
 ```
 
-```{r}
+```{r, echo=FALSE}
 investment <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-08-10/investment.csv')
 chain_investment <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-08-10/chain_investment.csv')
 ipd <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-08-10/ipd.csv')
@@ -47,47 +47,35 @@ The above mentioned, the case study of infrastructure should be USA because the 
 
 The data comes from [Bureau of Economic Analysis](https://www.bea.gov/system/files/papers/BEA-WP2020-12.pdf). The raw .xlsx file is included, or can be downloaded directly from the [BEA Working paper series](https://www.bea.gov/system/files/2021-01/infrastructure-data-may-2020.xlsx).
 
-The 3 primary data sets are already cleaned and saved as .csv files.
-
-The structure of the 3 data sets are shown below.
-
-#### **investment.csv:**
+The 3 primary data sets are already cleaned and saved as .csv files and they all have five variables. Of these, the four variables are the same as below.
 
 ```{r, echo=FALSE}
-variable <- c("category","meta_cat","group_num","year","gross_inv")
+variable <- c("category","meta_cat","group_num","year")
+class <- c("character","character","double","double")
 description <- c("Category of investment",
                  "Group category of investment",
                  "Group number of investment",
-                 "Year of investment",
-                 "Gross investment in millions of USD")
-invest_dic <- data.frame(variable, description) %>%
-  mutate(class = map(investment,typeof)) %>% 
-  select(variable,class,description)
-kable(invest_dic,
-      align = "lll","pipe")
+                 "Year of investment")
+e.g. <- c("Private,Federal...","Total infrastructure,Water supply,GDP...","1,2,3...","1947,1948,1949...")
+dic<- data.frame(variable, class,description, e.g.)
+
+kable(dic,
+      align = "llll","pipe")
 ```
 
-#### **chain_investment.csv:**
+The 3 data sets record the gross investment, chained investment in USD and Implicit Price Deflators (IPDs) respectively.
 
 ```{r, echo=FALSE}
-variable <- c("category","meta_cat","group_num","year","gross_inv_chain")
-description <- c(
-```
-
-#### **ipd.csv:**
-
-```{r, echo=FALSE}
-variable <- c("category","meta_cat","group_num","year","gross_inv_ipd")
-description <- c("Category of investment",
-                 "Group category of investment",
-                 "Group number of investment",
-                 "Year of investment",
+variable <- c("gross_inv","gross_inv_chain","gross_inv_ipd")
+class <- c("double","double","double")
+description <- c("Gross investment in millions of USD",
+                 "Gross investment (chained 2021 dollars) in millions of USD",
                  "Implicit Price Deflators (IPDs) An implicit price deflator is the ratio of the current-dollar value of a series, such as gross domestic product (GDP), to its corresponding chained-dollar value, multiplied by 100.")
-ipd_dic <- data.frame(variable, description) %>%
-  mutate(class = map(ipd,typeof)) %>% 
-  select(variable,class,description)
-kable(ipd_dic,
+dic2 <- data.frame(variable,class,description) 
+
+kable(dic2,
       align = "lll","pipe")
+
 ```
 
 
