@@ -28,7 +28,13 @@ library(kableExtra)
 investment <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-08-10/investment.csv')
 chain_investment <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-08-10/chain_investment.csv')
 ipd <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-08-10/ipd.csv')
-
+gdplev <- read_excel("gdplev.xlsx", range = "A9:C101", 
+    col_names = FALSE, col_types = c("numeric", 
+        "numeric", "numeric"))
+gdplev <- gdplev %>%
+  rename("year" = ...1,
+         "GDP_current" = ...2,
+         "GDP_chain" = ...3)
 ```
 
 
