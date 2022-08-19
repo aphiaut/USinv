@@ -69,7 +69,7 @@ kable(dic,
       align = "llll","pipe")
 ```
 
-The 3 data sets record the gross investment, chained investment in USD and Implicit Price Deflators (IPDs) respectively.
+The 3 data sets record the gross investment, chained investment in millions of USD and Implicit Price Deflators (IPDs) respectively.
 
 ```{r, echo=FALSE}
 variable <- c("gross_inv","gross_inv_chain","gross_inv_ipd")
@@ -81,10 +81,12 @@ dic2 <- data.frame(variable,class,description)
 
 kable(dic2,
       align = "lll","pipe")
-
+typeof(gdplev$year)
 ```
 
+The gdplev data set is downloaded from [Bureau of Economic Analysis](https://www.bea.gov/data/gdp/gross-domestic-product), which is a supplementary data set for our analysis. It records the current GDP and chain GDP in US from 1929 to 2021. Its variable contains year, GDP_current and GDP_chain whose type is all double.
 
+- Chained dollars: Chained dollars is a method of adjusting real dollar amounts for inflation over time, to allow the comparison of figures from different years. The U.S. Department of Commerce introduced the chained-dollar measure in 1996.
 
 # Questions of interest
 
@@ -137,6 +139,10 @@ kable(dic2,
 In question 6: We expect the positive relationship between total data investment and GDP. Moreover we expect to see the steep line from 1900 to 2017.
 
 In question 14: We expect the results should be the same or slightly difference.
+
+In question 18: We expect the strong relation between GDP and federal investment.
+
+In question 20: We expect there is a positive linear relationship between GDP and total basic. infrastructure investment.
 
 # Analysis and findings
 
