@@ -22,6 +22,8 @@ library(knitr)
 library(lubridate)
 library(sf)
 library(kableExtra)
+library(broom)
+library(readxl)
 ```
 
 ```{r, echo=FALSE}
@@ -147,5 +149,32 @@ In question 20: We expect there is a positive linear relationship between GDP an
 # Analysis and findings
 
 [FILL] Should include at least one plot or numerical summary for each of your questions, that helps the reader arrive at an answer. You should also write paragraphs describing the methods, summaries and findings. 
+
+What is the relationship between total digital investment and gdp?*
+
+```{r}
+investment <- investment %>%
+  left_join(gdplev, by = "year")
+chain_investment <- chain_investment %>%
+  left_join(gdplev, by = "year")
+```
+
+```{r}
+q6 <- investment %>%
+  filter(category == "Total digital infrastructure")
+  
+q6_lm <-  lm(GDP_current ~ gross_inv, data = q6)
+  
+ ggplot(q6,
+       aes(x = gross_inv,
+           y = GDP_current)) +
+  geom_point(alpha = 0.2) +
+  geom_smooth(method = "lm")
+q6_lm_summary <- glance(q6_lm)
+q6_lm_summary
+```
+
+
+
 
 # References
