@@ -83,7 +83,7 @@ dic2 <- data.frame(variable,class,description)
 
 kable(dic2,
       align = "lll","pipe")
-typeof(gdplev$year)
+
 ```
 
 The gdplev data set is downloaded from [Bureau of Economic Analysis](https://www.bea.gov/data/gdp/gross-domestic-product), which is a supplementary data set for our analysis. It records the current GDP and chain GDP in US from 1929 to 2021. Its variable contains year, GDP_current and GDP_chain whose type is all double.
@@ -104,7 +104,7 @@ The gdplev data set is downloaded from [Bureau of Economic Analysis](https://www
 
 5. What year and category are the lowest investment and Chain?
 
-**6. What is the relationship between total digital investment and gdp?** (download gdp from other and join it later)
+6. **What is the relationship between total digital investment and gdp?** (download gdp from other and join it later)
 
 7. What are the highest investment between Air, Water, Rail transportation investment ?
 
