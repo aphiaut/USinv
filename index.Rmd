@@ -172,6 +172,7 @@ q6_lm <-  lm(GDP_current ~ gross_inv, data = q6)
   geom_smooth(method = "lm")
 q6_lm_summary <- glance(q6_lm)
 q6_lm_summary
+tidy(q6_lm)
 ```
 
 
