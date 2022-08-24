@@ -83,7 +83,7 @@ dic2 <- data.frame(variable,class,description)
 
 kable(dic2,
       align = "lll","pipe")
-typeof(gdplev$year)
+
 ```
 
 The gdplev data set is downloaded from [Bureau of Economic Analysis](https://www.bea.gov/data/gdp/gross-domestic-product), which is a supplementary data set for our analysis. It records the current GDP and chain GDP in US from 1929 to 2021. Its variable contains year, GDP_current and GDP_chain whose type is all double.
