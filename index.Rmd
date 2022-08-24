@@ -104,7 +104,7 @@ The gdplev data set is downloaded from [Bureau of Economic Analysis](https://www
 
 5. What year and category are the lowest investment and Chain?
 
-**6. What is the relationship between total digital investment and gdp?** (download gdp from other and join it later)
+6. **What is the relationship between total digital investment and gdp?** (download gdp from other and join it later)
 
 7. What are the highest investment between Air, Water, Rail transportation investment ?
 
