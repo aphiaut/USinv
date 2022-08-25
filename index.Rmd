@@ -339,8 +339,11 @@ g2 <- ggplotRegression(lm(GDP_current ~ gross_inv,data = q18_F)) +
 grid.arrange(g1,g2,nrow = 1,top = "Linear relationship between investment and GDP")
 ```
 
-R-squared (R2) represents the proportion of the variance for current GDP that’s explained by the gross private and federal investment in the regression model. According to the linear graph above, 98.6% private investment can explain the current GDP, rather only 78.1% federal investment can explain that. Obviously, there is a stronger linear relationship between GDP and private investment which is unexpected. This result relates with the study of Private investment as the engine of economic
-growth and social welfare that investigated the private investment can explain the variance of GDP growth rate more than public investment (Doménech & Sicilia, 2021).
+As we can see in the line graph, the current GDP has a generally increasing trend by time, and the trend of gross private investment is similar with that. While the gross federal investment has fluctuated since around 1980.
+
+By observing the trends of the three variables, we guess that current GDP and the other two may have a linear relationship, so we make a linear model to judge whether they have a linear relationship. As a result, GDP dose have linear relationship with private investment and federal investment respectively, and the private investment has stronger impact on current GDP.
+
+R-squared (R2) is a important statistical measurement that represents the proportion of the variance for current GDP that’s explained by the gross private and federal investment in the regression model. For example, 98.6% private investment can explain the current GDP, rather only 78.1% federal investment can explain that. Obviously, there is a stronger linear relationship between GDP and private investment which is unexpected. This result relates with the study of Private investment as the engine of economic growth and social welfare that investigated the private investment can explain the variance of GDP growth rate more than public investment (Doménech & Sicilia, 2021).
 
 **Is there a linear relationship between GDP and total basic infrastructure investment? Positive or negative?**
 
@@ -364,7 +367,7 @@ From the result can be expressed the formula as:
 
 $$
 \begin{align*}
-{GDP} = -337073.45	 + 59.02 {Transportation}
+{GDP} = -337073.45	 + 59.02 {Basic}
 \end{align*}
 $$
 
