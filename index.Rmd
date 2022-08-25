@@ -13,7 +13,7 @@ output:
 [This assignment is for ETC5521 Assignment 1 by Team `r rmarkdown::metadata$team` comprising of `r knitr::combine_words(rmarkdown::metadata$author)`.]{style="color:#006DAE;"}
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, 
+knitr::opts_chunk$set(echo = FALSE, 
                       message = FALSE, 
                       warning = FALSE)
 library(tidyverse)
@@ -103,17 +103,17 @@ The gdplev data set is downloaded from [Bureau of Economic Analysis](https://www
 
 5. What year and category are the lowest investment and Chain?
 
-6. **What is the relationship between total digital investment and gdp?** (download gdp from other and join it later)
+6. **What is the relationship between total digital investment and gdp?** 
 
 7. What are the highest investment between Air, Water, Rail transportation investment ?
 
 8. What are the similarities/difference of trend between Federal electric power structures investment and Private electric power structures investment?
 
-9. How does the digital investment change? (ipd) it will show the changing of price base on based year (2012)
+9. How does the digital investment change? 
 
-10. How does the transportation investment change? (ipd) it will show the changing of price base on based year (2012)
+10. How does the transportation investment change? 
 
-11. How does the power investment change? (ipd) it will show the changing of price base on based year (2012)
+11. How does the power investment change? 
 
 12. What is the proportion of total social investment in all category infrastructure?
 
@@ -207,8 +207,7 @@ tidy(q6_lm)
 ```
 The figure 1 shows the positive trend of total digital infrastructure investment, moreover, it is a steeply increasing trend between 1990 and 2017. Although overall the trend is increasing trend, around 1999 to 2009 are a slightly fluctuation.
 
-The figure 3 illustrates the proportion increasing between Total digital infrastructure and GDP is 1:1 
-R-squared is 95.54% of variant and it shows nice linear model. Therefore, the result of relationship between Total digital infrastructure and GDP can summaries by linear model. 
+The figure 3 illustrates the proportion increasing between Total digital infrastructure and GDP is 1:1. 
 From the result can be expressed the formula as:
 
 $$
@@ -216,7 +215,10 @@ $$
 {GDP} = 659595.97 + 112.63{digital}
 \end{align*}
 $$
+
 This formula means if total digital infrastructure increase 1 million US dollar, the Gross Domestic Product will increase 112.63 million US dollar. This result related with study of Zhang et al. (2022) that investigated the increasing of digital economy will increase the GDP around 0.78%. Furthermore, they told it can be seen by the development of  new technology such as internet and mobile phone communication.
+
+R-squared is 95.54% of variant and it shows nice linear model. Therefore, the result of relationship between Total digital infrastructure and GDP can summaries by linear model.
 
 In Addition, this result same with our expected finding that is a positive relationship between total digital infrastructure and GDP. However, the trend of Total digital infrastructure has steeply increased since 1990, GDP has steeply increased since 1980. It means Total digital infrastructure doesn't significant affect to GDP from 1980 to 1990 too much.
 
@@ -279,7 +281,7 @@ $$
 \end{align*}
 $$
 
-This formula means if transportation investment increase 1 million chained US dollar, the Gross Domestic Product will increase 0.13 million chained US dollar. This result relates with the study of Weisbrod and Reno (2009) that agured the positive significant of relation between transportation investment and GDP. Moreover, transportation investment has a positive effect to economic	growth (Lin, 2020). 
+This formula means if transportation investment increase 1 million chained US dollar, the Gross Domestic Product will increase 0.13 million chained US dollar. This result relates with the study of Weisbrod and Reno (2009) that agrued the positive significant of relation between transportation investment and GDP. Moreover, transportation investment has a positive effect to economic	growth (Lin, 2020). 
 
 R-squared is 67.39% of variant Therefore, the result of relationship between transportation investment (chained dollar) and Gross Domestic Product (chained dollar) should not summary by linear model or this formula has omitted variables. 
 
@@ -337,7 +339,8 @@ g2 <- ggplotRegression(lm(GDP_current ~ gross_inv,data = q18_F)) +
 grid.arrange(g1,g2,nrow = 1,top = "Linear relationship between investment and GDP")
 ```
 
-R-squared (R2) represents the proportion of the variance for current GDP that’s explained by the gross private and federal investment in the regression model. According to the linear graph above, 98.6% private investment can explain the current GDP, rather only 78.1% federal investment can explain that. Obviously, there is a stronger linear relationship between GDP and private investment which is unexpected. 
+R-squared (R2) represents the proportion of the variance for current GDP that’s explained by the gross private and federal investment in the regression model. According to the linear graph above, 98.6% private investment can explain the current GDP, rather only 78.1% federal investment can explain that. Obviously, there is a stronger linear relationship between GDP and private investment which is unexpected. This result relates with the study of Private investment as the engine of economic
+growth and social welfare that investigated the private investment can explain the variance of GDP growth rate more than public investment (Doménech & Sicilia, 2021).
 
 **Is there a linear relationship between GDP and total basic infrastructure investment? Positive or negative?**
 
@@ -348,6 +351,7 @@ q20 <- investment %>%
 q20_lm <-lm(GDP_current ~ gross_inv, data = q20)
 q20_lm_summary <- glance(q20_lm)
 q20_lm_summary
+tidy(q20_lm)
 
 g3 <- ggplotRegression(lm(GDP_current ~ gross_inv,data = q20)) +
   labs(x = "Total Basic Infrastructure Inv", y = "Current GDP") +
@@ -356,6 +360,28 @@ g3 <- ggplotRegression(lm(GDP_current ~ gross_inv,data = q20)) +
 g3
 ```
 
+From the result can be expressed the formula as:
+
+$$
+\begin{align*}
+{GDP} = -337073.45	 + 59.02 {Transportation}
+\end{align*}
+$$
+
+This formula means if transportation investment increase 1 million US dollar, the Gross Domestic Product will increase 59.02  million US dollar. Moreover, the distribution of data has a positive linear relationship in figure 4. The trend is increasing because infrastructure investment effect to increasing a huge stock of public capital such as developing or creating new roads. That is a directly effect to increase government spending(G) in the gdp formula (Stupak, 2017).  Furethermore, Gunnion (2021) claims the investment of infrastructure is positive impact to economic output.
+
+R-squared is 98.67% of variant, therefore, the result of relationship between total basic infrastructure investment and Gross Domestic Product can summary by linear model. 
+
+Additionally, these result can confirm the expected finding is correct by the graph, the result of regression and R-square.
 
 
 # References
+
+Doménech, R., & Sicilia, J. (2021). Private investment as the engine of economic growth and social welfare / Private investment as the engine of economic growth and social welfare. https://www.bbvaresearch.com/wp-content/uploads/2021/04/EWPrivate_Investment_and_GDP_growthWB.pdf
+Gunnion, L. (2021, July). What does infrastructure investment mean for the US economy? Deloitte Insights. https://www2.deloitte.com/us/en/insights/economy/spotlight/impact-of-us-infrastructure-investment.html
+IBM. (2022). About Linear Regression | IBM. Www.ibm.com. https://www.ibm.com/topics/linear-regression
+Lin, X. (2020). Multiple pathways of transportation investment to promote economic growth in China: a structural equation modeling perspective. Transportation Letters, 12(7), 471–482. https://doi.org/10.1080/19427867.2019.1635780
+Stupak, J. (2017). Economic Impact of Infrastructure Investment. https://ecommons.cornell.edu/bitstream/handle/1813/78289/CRS_Economic_Impact_of_Infrastructure_Investment_0717.pdf?sequence=1&isAllowed=y
+Weisbrod, G., & Reno, A. (2009). ECONOMIC IMPACT OF PUBLIC TRANSPORTATION INVESTMENT. https://onlinepubs.trb.org/onlinepubs/tcrp/docs/TCRPJ-11Task7-FR.pdf
+Zhang, J., Zhao, W., Cheng, B., Li, A., Wang, Y., Yang, N., & Tian, Y. (2022). The Impact of Digital Economy on the Economic Growth and the Development Strategies in the post-COVID-19 Era: Evidence From Countries Along the “Belt and Road.” Frontiers in Public Health, 10. https://doi.org/10.3389/fpubh.2022.856142
+
