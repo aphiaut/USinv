@@ -268,6 +268,43 @@ R-squared is 67.39% of variant Therefore, the result of relationship between tra
 
 This result same with our expected finding that is a positive relationship between transportation investment (chained dollar) and Gross Domestic Product (chained dollar). However, this relationship can not explain with linear model and the coefficient is too low that are not same with our expected finding.
 
+**What is the relationship between GDP and private investment, federal investment？And which one is stronger impact on GDP?**
+
+```{r q18}
+options(scipen=100, digits=4)
+q18_P1 <- investment %>%
+  filter(category == "Private") 
+q18_P <- q18_P1 %>%
+  filter(meta_cat == "Total infrastructure")
+q18_F1 <- investment %>%
+  filter(category == "Federal")
+q18_F <- q18_F1 %>%
+  filter(meta_cat == "Total infrastructure")
+
+
+ggplotRegression <- function (x) {
+  ggplot(x$model, aes_string(x = names(x$model)[2], 
+                               y = names(x$model)[1])) +
+    geom_point(shape = 1,
+               size = 2,
+               color="#0072B2")+
+    stat_smooth(method = "lm", 
+                col = "red",
+                size = 1) +
+    labs(title = paste("R2 = ",signif(summary(x)$r.squared, 3)))
+}
+
+g1 <- ggplotRegression(lm(GDP_current ~ gross_inv,data = q18_P)) +
+  labs(x = "Gross investment", y = "Current GDP")
+g2 <- ggplotRegression(lm(GDP_current ~ gross_inv,data = q18_F)) +
+  labs(x = "Gross investment", y = "Current GDP")
+
+grid.arrange(g1,g2,nrow = 1)
+```
+
+R-squared (R2) represents the proportion of the variance for current GDP that’s explained by the gross private and federal investment in the regression model. According to the linear graph above, 98.6% private investment can explain the current GDP, rather only 78.1% federal investment can explain that. Obviously, there is a stronger linear relationship between GDP and private investment which is unexpected. 
+
+
 
 
 
