@@ -24,6 +24,7 @@ library(sf)
 library(kableExtra)
 library(broom)
 library(readxl)
+library(gridExtra)
 ```
 
 ```{r, echo=FALSE}
@@ -42,7 +43,6 @@ gdplev <- gdplev %>%
 
 # Introduction and motivation
 
-[FILL] Give the bigger picture of the data, and inspire the reader to learn more about the problem by reading your analysis. 
 
 Infrastructure investment is an important core of the country. It includes federal investments such as water suppliers and a private sector investment that manages electricity. It also includes the cost of research and development in technology.
 
@@ -92,7 +92,6 @@ The gdplev data set is downloaded from [Bureau of Economic Analysis](https://www
 
 # Questions of interest
 
-[FILL] What questions might be possible to answer with this data, aiming for about 20. Bold the 3-4 questions you will address in the 
 
 1. What category of investment is the highest average gross investment and Chain? Does it same?
 
@@ -120,7 +119,7 @@ The gdplev data set is downloaded from [Bureau of Economic Analysis](https://www
 
 13. What is the proportion of total basic infrastructure investment in all category infrastructure?
 
-14. **How does changing of basic infrastructure investment (million dollar) similar/different with Implicit Price Deflators  (IPDs) of basic infrastructure investment?**
+14. **What is the relationship between transportation investment (chaind us dollar) and gdp (chaind us dollar)?**
 
 15. What are the trends in all categories infrastructure investment so far?
 
@@ -136,11 +135,10 @@ The gdplev data set is downloaded from [Bureau of Economic Analysis](https://www
 
 # Expected findings
 
-[FILL] For your chosen questions explain what you think you might find.
 
 In question 6: We expect the positive relationship between total data investment and GDP. Moreover we expect to see the steep line from 1900 to 2017.
 
-In question 14: We expect the results should be the same or slightly difference.
+In question 14: We expect the positive relationship between transportation (chaind US dollar) and GDP(chaind US dollar), the result can explain by the linear model and high effect value to GDP.
 
 In question 18: We expect the strong relation between GDP and federal investment.
 
@@ -148,32 +146,127 @@ In question 20: We expect there is a positive linear relationship between GDP an
 
 # Analysis and findings
 
-[FILL] Should include at least one plot or numerical summary for each of your questions, that helps the reader arrive at an answer. You should also write paragraphs describing the methods, summaries and findings. 
 
-What is the relationship between total digital investment and gdp?*
+**What is the relationship between total digital investment and gdp?**
 
 ```{r}
 investment <- investment %>%
-  left_join(gdplev, by = "year")
+  left_join(gdplev, by = "year") 
+investment <- investment %>%
+  mutate(GDP_current = GDP_current*1000)
+
+
 chain_investment <- chain_investment %>%
   left_join(gdplev, by = "year")
+
+chain_investment <- chain_investment %>%
+  mutate(GDP_current = GDP_current*1000)
 ```
 
 ```{r}
 q6 <- investment %>%
-  filter(category == "Total digital infrastructure")
+  filter(category == "Total digital infrastructure") %>%
+  rename("digital" = gross_inv)
   
-q6_lm <-  lm(GDP_current ~ gross_inv, data = q6)
+q6_lm <-  lm(GDP_current ~ digital, data = q6)
   
+ggplot(q6,
+       aes(x = year,
+           y = digital)) +
+  geom_point() +
+  geom_vline(xintercept = 1990, linetype="dashed", color = "red")+
+  ggtitle("The trend of total digital infrastructure investment from 1947 to 2017")
+
+
+ggplot(q6,
+       aes(x = year,
+           y = GDP_current)) +
+  geom_point() +
+  geom_vline(xintercept = 1990, linetype="dashed", color = "red")+
+  ggtitle("The trend of Gross Domestic Product(GDP) from 1947 to 2017")
+
  ggplot(q6,
-       aes(x = gross_inv,
+       aes(x = digital,
            y = GDP_current)) +
   geom_point(alpha = 0.2) +
-  geom_smooth(method = "lm")
+  geom_smooth(method = "lm")+
+  ggtitle("The relationship between total digital investment and gdp")
 q6_lm_summary <- glance(q6_lm)
 q6_lm_summary
 tidy(q6_lm)
 ```
+The figure 1 shows the positive trend of total digital infrastructure investment, moreover, it is a steeply increasing trend between 1990 and 2017. Although overall the trend is increasing trend, around 1999 to 2009 are a slightly fluctuation.
+
+The figure 3 illustrates the proportion increasing between Total digital infrastructure and GDP is 1:1 
+R-squared is 95.54% of variant and it shows nice linear model. Therefore, the result of relationship between Total digital infrastructure and GDP can summaries by linear model. 
+From the result can be expressed the formula as:
+
+$$
+\begin{align*}
+{GDP} = 659595.97 + 112.63{digital}
+\end{align*}
+$$
+This formula means if total digital infrastructure increase 1 million US dollar, the Gross Domestic Product will increase 112.63 million US dollar.
+
+This result same with our expected finding that is a positive relationship between Total digital infrastructure and GDP. However, the trend of Total digital infrastructure has steeply increased since 1990, GDP has steeply increased since 1980. It means Total digital infrastructure doesn't significant affect to GDP from 1980 to 1990 too much.
+
+
+**What is the relationship between transportation investment (chaind us dollar) and gdp (chaind us dollar)?**
+
+```{r}
+
+q14 <- chain_investment %>%
+   filter(category == "Transportation") %>%
+   pivot_wider(names_from = category, values_from = gross_inv_chain)
+
+q14_lm <-  lm(GDP_chain ~ Transportation, data = q14)
+  
+transport <- ggplot(q14,
+       aes(x = year,
+           y = Transportation)) +
+  geom_point() #+
+ # geom_vline(xintercept = 1990, linetype="dashed", color = "red")+
+#  ggtitle("The trend of total digital infrastructure investment from 1947 to 2017")
+
+
+
+
+gdp <- ggplot(q14,
+       aes(x = year,
+           y = GDP_chain)) +
+  geom_point() +
+  geom_vline(xintercept = 1990, linetype="dashed", color = "red")+
+  ggtitle("The trend of Gross Domestic Product(GDP) from 1947 to 2017")
+
+grid.arrange(transport, gdp, nrow=2)
+
+ ggplot(q14,
+       aes(x = Transportation,
+           y = GDP_chain)) +
+  geom_point(alpha = 0.2) +
+  geom_smooth(method = "lm")+
+  ggtitle("The relationship between transportation investment and gdp")
+q14_lm_summary <- glance(q14_lm)
+q14_lm_summary
+tidy(q14_lm)
+```
+
+The figure 1 shows the positive trend of transportation investment (chained dollar), however, it is a steeply a slightly fluctuation between 1968 and 1998. While Gross Domestic Product (chained dollar) is a positive trend and increases over year.
+
+The figure 3 illustrates the relationship between transportation investment (chained dollar) and GDP (chained dollar),  nonetheless it is difficult explain the relationship of both variables is linear. 
+From the result can be expressed the formula as:
+
+$$
+\begin{align*}
+{GDP} = -5164.83 + 0.13{Transportation}
+\end{align*}
+$$
+
+This formula means if transportation investment increase 1 million chained US dollar, the Gross Domestic Product will increase 0.13 million chained US dollar.
+
+R-squared is 67.39% of variant Therefore, the result of relationship between transportation investment (chained dollar) and Gross Domestic Product (chained dollar) should not summary by linear model or this formula has omitted variables. 
+
+This result same with our expected finding that is a positive relationship between transportation investment (chained dollar) and Gross Domestic Product (chained dollar). However, this relationship can not explain with linear model and the coefficient is too low that are not same with our expected finding.
 
 
 
