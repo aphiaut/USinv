@@ -295,16 +295,29 @@ ggplotRegression <- function (x) {
 }
 
 g1 <- ggplotRegression(lm(GDP_current ~ gross_inv,data = q18_P)) +
-  labs(x = "Gross investment", y = "Current GDP")
+  labs(x = "Gross Private Investment", y = "Current GDP")
 g2 <- ggplotRegression(lm(GDP_current ~ gross_inv,data = q18_F)) +
-  labs(x = "Gross investment", y = "Current GDP")
+  labs(x = "Gross Federal Investment", y = "Current GDP")
 
 grid.arrange(g1,g2,nrow = 1)
 ```
 
 R-squared (R2) represents the proportion of the variance for current GDP that’s explained by the gross private and federal investment in the regression model. According to the linear graph above, 98.6% private investment can explain the current GDP, rather only 78.1% federal investment can explain that. Obviously, there is a stronger linear relationship between GDP and private investment which is unexpected. 
 
+**Is there a linear relationship between GDP and total basic infrastructure investment? Positive or negative?**
 
+```{r}
+q20 <- investment %>%
+  filter(category == "Total basic infrastructure")
+
+q20_lm <-lm(GDP_current ~ gross_inv, data = q20)
+q20_lm_summary <- glance(q20_lm)
+q20_lm_summary
+
+g3 <- ggplotRegression(lm(GDP_current ~ gross_inv,data = q20)) +
+  labs(x = "Total Basic Infrastructure Inv", y = "Current GDP")
+g3
+```
 
 
 
