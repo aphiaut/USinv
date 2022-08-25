@@ -5,7 +5,7 @@ Team name: [Lorikeet]
 Team members:
 
 * [Aphiaut Imuan]
-* [FILL]
+* [Xintong You]
 
 # Steps
 
