@@ -146,6 +146,9 @@ In question 20: We expect there is a positive linear relationship between GDP an
 
 # Analysis and findings
 
+**Methodology**
+This study uses the linear model to analysis because linear models are the simple and present a mathematical equation which easy to interpret and can be predictions. Moreover, the linear regression model is a reliable predictors because it is a long established statistical procedure  and the character of linear regression is easy to understand (IBM, 2022).
+
 
 **What is the relationship between total digital investment and gdp?**
 
@@ -213,9 +216,9 @@ $$
 {GDP} = 659595.97 + 112.63{digital}
 \end{align*}
 $$
-This formula means if total digital infrastructure increase 1 million US dollar, the Gross Domestic Product will increase 112.63 million US dollar.
+This formula means if total digital infrastructure increase 1 million US dollar, the Gross Domestic Product will increase 112.63 million US dollar. This result related with study of Zhang et al. (2022) that investigated the increasing of digital economy will increase the GDP around 0.78%. Furthermore, they told it can be seen by the development of  new technology such as internet and mobile phone communication.
 
-This result same with our expected finding that is a positive relationship between Total digital infrastructure and GDP. However, the trend of Total digital infrastructure has steeply increased since 1990, GDP has steeply increased since 1980. It means Total digital infrastructure doesn't significant affect to GDP from 1980 to 1990 too much.
+In Addition, this result same with our expected finding that is a positive relationship between total digital infrastructure and GDP. However, the trend of Total digital infrastructure has steeply increased since 1990, GDP has steeply increased since 1980. It means Total digital infrastructure doesn't significant affect to GDP from 1980 to 1990 too much.
 
 
 **What is the relationship between transportation investment (chaind us dollar) and gdp (chaind us dollar)?**
@@ -276,7 +279,7 @@ $$
 \end{align*}
 $$
 
-This formula means if transportation investment increase 1 million chained US dollar, the Gross Domestic Product will increase 0.13 million chained US dollar.
+This formula means if transportation investment increase 1 million chained US dollar, the Gross Domestic Product will increase 0.13 million chained US dollar. This result relates with the study of Weisbrod and Reno (2009) that agured the positive significant of relation between transportation investment and GDP. Moreover, transportation investment has a positive effect to economic	growth (Lin, 2020). 
 
 R-squared is 67.39% of variant Therefore, the result of relationship between transportation investment (chained dollar) and Gross Domestic Product (chained dollar) should not summary by linear model or this formula has omitted variables. 
 
