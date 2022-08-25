@@ -175,6 +175,7 @@ ggplot(q6,
            y = digital)) +
   geom_point() +
   geom_vline(xintercept = 1990, linetype="dashed", color = "red")+
+  theme_bw() +
   ggtitle("The trend of total digital infrastructure investment from 1947 to 2017")
 
 
@@ -183,14 +184,20 @@ ggplot(q6,
            y = GDP_current)) +
   geom_point() +
   geom_vline(xintercept = 1990, linetype="dashed", color = "red")+
+  theme_bw() +
   ggtitle("The trend of Gross Domestic Product(GDP) from 1947 to 2017")
 
  ggplot(q6,
        aes(x = digital,
            y = GDP_current)) +
-  geom_point(alpha = 0.2) +
-  geom_smooth(method = "lm")+
-  ggtitle("The relationship between total digital investment and gdp")
+  geom_point(shape = 1,
+               size = 2,
+               color="#0072B2") +
+  geom_smooth(method = "lm",
+              col = "red",
+              size = 1)+
+  ggtitle("The relationship between total digital investment and gdp") +
+   theme_bw()
 q6_lm_summary <- glance(q6_lm)
 q6_lm_summary
 tidy(q6_lm)
@@ -224,7 +231,8 @@ q14_lm <-  lm(GDP_chain ~ Transportation, data = q14)
 transport <- ggplot(q14,
        aes(x = year,
            y = Transportation)) +
-  geom_point() #+
+  geom_point() +
+  theme_bw()#+
  # geom_vline(xintercept = 1990, linetype="dashed", color = "red")+
 #  ggtitle("The trend of total digital infrastructure investment from 1947 to 2017")
 
@@ -236,6 +244,7 @@ gdp <- ggplot(q14,
            y = GDP_chain)) +
   geom_point() +
   geom_vline(xintercept = 1990, linetype="dashed", color = "red")+
+  theme_bw() +
   ggtitle("The trend of Gross Domestic Product(GDP) from 1947 to 2017")
 
 grid.arrange(transport, gdp, nrow=2)
@@ -243,9 +252,14 @@ grid.arrange(transport, gdp, nrow=2)
  ggplot(q14,
        aes(x = Transportation,
            y = GDP_chain)) +
-  geom_point(alpha = 0.2) +
-  geom_smooth(method = "lm")+
-  ggtitle("The relationship between transportation investment and gdp")
+  geom_point(shape = 1,
+               size = 2,
+               color="#0072B2") +
+  geom_smooth(method = "lm",
+              col = "red",
+              size = 1)+
+  ggtitle("The relationship between transportation investment and gdp") +
+   theme_bw()
 q14_lm_summary <- glance(q14_lm)
 q14_lm_summary
 tidy(q14_lm)
@@ -281,6 +295,22 @@ q18_F1 <- investment %>%
 q18_F <- q18_F1 %>%
   filter(meta_cat == "Total infrastructure")
 
+gg1 <- ggplot(q18_P,aes(year,GDP_current)) +
+  geom_line(color = "blue") +
+  theme_bw() +
+  ggtitle("Trend of current GDP") 
+
+gg2 <- ggplot(q18_P,aes(year,gross_inv)) +
+  geom_line(color="blue") +
+  theme_bw()+
+  ggtitle("Trend of gross private investment") 
+
+gg3 <-  ggplot(q18_F,aes(year,gross_inv)) +
+  geom_line(color="blue") +
+  theme_bw() +
+  ggtitle("Trend of gross federal investment") 
+  
+grid.arrange(gg1,gg2,gg3,layout_matrix=rbind(c(1,1),c(2,3)))
 
 ggplotRegression <- function (x) {
   ggplot(x$model, aes_string(x = names(x$model)[2], 
@@ -288,18 +318,20 @@ ggplotRegression <- function (x) {
     geom_point(shape = 1,
                size = 2,
                color="#0072B2")+
-    stat_smooth(method = "lm", 
+    geom_smooth(method = "lm", 
                 col = "red",
                 size = 1) +
     labs(title = paste("R2 = ",signif(summary(x)$r.squared, 3)))
 }
 
 g1 <- ggplotRegression(lm(GDP_current ~ gross_inv,data = q18_P)) +
-  labs(x = "Gross Private Investment", y = "Current GDP")
+  labs(x = "Gross Private Investment", y = "Current GDP") +
+  theme_bw()
 g2 <- ggplotRegression(lm(GDP_current ~ gross_inv,data = q18_F)) +
-  labs(x = "Gross Federal Investment", y = "Current GDP")
+  labs(x = "Gross Federal Investment", y = "Current GDP") +
+  theme_bw()
 
-grid.arrange(g1,g2,nrow = 1)
+grid.arrange(g1,g2,nrow = 1,top = "Linear relationship between investment and GDP")
 ```
 
 R-squared (R2) represents the proportion of the variance for current GDP that’s explained by the gross private and federal investment in the regression model. According to the linear graph above, 98.6% private investment can explain the current GDP, rather only 78.1% federal investment can explain that. Obviously, there is a stronger linear relationship between GDP and private investment which is unexpected. 
@@ -315,7 +347,9 @@ q20_lm_summary <- glance(q20_lm)
 q20_lm_summary
 
 g3 <- ggplotRegression(lm(GDP_current ~ gross_inv,data = q20)) +
-  labs(x = "Total Basic Infrastructure Inv", y = "Current GDP")
+  labs(x = "Total Basic Infrastructure Inv", y = "Current GDP") +
+  theme_bw() +
+  ggtitle("Relationship between GDP and total basic infrastructure investment")
 g3
 ```
 
