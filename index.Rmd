@@ -103,7 +103,7 @@ The gdplev data set is downloaded from [Bureau of Economic Analysis](https://www
 
 5. What year and category are the lowest investment and Chain?
 
-6. **What is the relationship between total digital investment and gdp?** 
+6. **What is the relationship between total digital investment and GDP?** 
 
 7. What are the highest investment between Air, Water, Rail transportation investment ?
 
@@ -119,7 +119,7 @@ The gdplev data set is downloaded from [Bureau of Economic Analysis](https://www
 
 13. What is the proportion of total basic infrastructure investment in all category infrastructure?
 
-14. **What is the relationship between transportation investment (chaind us dollar) and gdp (chaind us dollar)?**
+14. **What is the relationship between transportation investment (chained US dollars) and GDP (chained US dollars)?**
 
 15. What are the trends in all categories infrastructure investment so far?
 
@@ -140,7 +140,7 @@ In question 6: We expect the positive relationship between total data investment
 
 In question 14: We expect the positive relationship between transportation (chained US dollar) and GDP (chained US dollar), the result can explain by the linear model and high effect value to GDP.
 
-In question 18: We expect the strong relation between GDP and federal investment.
+In question 18: We expect a strong relationship between GDP and federal investment, and both relations are positive linear relationships.
 
 In question 20: We expect there is a positive linear relationship between GDP and total basic. infrastructure investment.
 
@@ -387,19 +387,59 @@ This formula means if transportation investment increases by 1 million US dollar
 Additionally, these results can confirm the expected finding is correct by the graph, the result of regression, and R-square.
 
 
+# Conclusion
+
+This study is exploratory infrastructural investment data in the USA. The study has 4 interesting questions from the infrastructural investment data that is presented in the finding, including 1. What is the relationship between total digital investment and GDP? 2. What is the relationship between transportation investment (chained US dollars) and GDP (chained US dollars)? 3. What is the relationship between GDP and private investment, and federal investment？ And which one is the stronger impact on GDP? 4. Is there a linear relationship between GDP and total basic infrastructure investment? Does it a positive or negative? This study investigates the relationship between the total digital investment and GDP as a positive linear. Moreover, the correlative implication between transportation investment (chained US dollars) and GDP (chained US dollars) is a positive linear relationship. Furthermore, each association of private investment, federal investment, and GDP is a positive linear relationship and private investment is a higher effect on GDP than federal investment. In addition, total basic infrastructure investment has a positive linear relationship with GDP.
+
 # References
+
+Auguie B (2017). _gridExtra: Miscellaneous Functions for "Grid" Graphics_. R package
+  version 2.3, <https://CRAN.R-project.org/package=gridExtra>.
 
 Doménech, R., & Sicilia, J. (2021). Private investment as the engine of economic growth and social welfare / Private investment as the engine of economic growth and social welfare. https://www.bbvaresearch.com/wp-content/uploads/2021/04/EWPrivate_Investment_and_GDP_growthWB.pdf
 
+Garrett Grolemund, Hadley Wickham (2011). Dates and Times Made Easy with lubridate.
+  Journal of Statistical Software, 40(3), 1-25. URL https://www.jstatsoft.org/v40/i03/.
+
 Gunnion, L. (2021, July). What does infrastructure investment mean for the US economy? Deloitte Insights. https://www2.deloitte.com/us/en/insights/economy/spotlight/impact-of-us-infrastructure-investment.html
+
+H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York, 2016.
 
 IBM. (2022). About Linear Regression | IBM. Www.ibm.com. https://www.ibm.com/topics/linear-regression
 
 Lin, X. (2020). Multiple pathways of transportation investment to promote economic growth in China: a structural equation modeling perspective. Transportation Letters, 12(7), 471–482. https://doi.org/10.1080/19427867.2019.1635780
 
+Pebesma, E., 2018. Simple Features for R: Standardized Support for Spatial Vector Data.
+  The R Journal 10 (1), 439-446, https://doi.org/10.32614/RJ-2018-009
+  
+Robinson D, Hayes A, Couch S (2022). _broom: Convert Statistical Objects into Tidy
+  Tibbles_. R package version 1.0.0, <https://CRAN.R-project.org/package=broom>.  
+
 Stupak, J. (2017). Economic Impact of Infrastructure Investment. https://ecommons.cornell.edu/bitstream/handle/1813/78289/CRS_Economic_Impact_of_Infrastructure_Investment_0717.pdf?sequence=1&isAllowed=y
+
+Wickham H, Averick M, Bryan J, Chang W, McGowan LD, François R, Grolemund G, Hayes A,
+  Henry L, Hester J, Kuhn M, Pedersen TL, Miller E, Bache SM, Müller K, Ooms J, Robinson
+  D, Seidel DP, Spinu V, Takahashi K, Vaughan D, Wilke C, Woo K, Yutani H (2019). “Welcome
+  to the tidyverse.” _Journal of Open Source Software_, *4*(43), 1686.
+  doi:10.21105/joss.01686 <https://doi.org/10.21105/joss.01686>.
+  
+Wickham H, Bryan J (2022). _readxl: Read Excel Files_. R package version 1.4.0,
+  <https://CRAN.R-project.org/package=readxl>.
 
 Weisbrod, G., & Reno, A. (2009). ECONOMIC IMPACT OF PUBLIC TRANSPORTATION INVESTMENT. https://onlinepubs.trb.org/onlinepubs/tcrp/docs/TCRPJ-11Task7-FR.pdf
 
+Yihui Xie (2022). knitr: A General-Purpose Package for Dynamic Report Generation in R. R
+  package version 1.39.
+
 Zhang, J., Zhao, W., Cheng, B., Li, A., Wang, Y., Yang, N., & Tian, Y. (2022). The Impact of Digital Economy on the Economic Growth and the Development Strategies in the post-COVID-19 Era: Evidence From Countries Along the “Belt and Road.” Frontiers in Public Health, 10. https://doi.org/10.3389/fpubh.2022.856142
 
+Zhu H (2021). _kableExtra: Construct Complex Table with 'kable' and Pipe Syntax_. R
+  package version 1.3.4, <https://CRAN.R-project.org/package=kableExtra>.
+
+
+<details>
+<summary>Session information</summary>
+```{r, echo = FALSE}
+sessioninfo::session_info()
+```
+</details>
