@@ -349,7 +349,7 @@ g2 <- ggplotRegression(lm(GDP_current ~ gross_inv,data = q18_F)) +
   labs(x = "Gross Federal Investment", y = "Current GDP") +
   theme_bw()
 
-grid.arrange(g1,g2,nrow = 1,top = "Linear relationship between investment and GDP")
+grid.arrange(g1,g2,nrow = 1)
 ```
 
 Figure \@ref(fig:q18fig6) illustrates the current GDP has a generally increasing trend over time, and the trend of gross private investment is similar to that. While the gross federal investment has fluctuated since around 1980 Figure 9.
