@@ -5,8 +5,6 @@ author:
 - Xintong You
 date: "`r Sys.Date()`"
 output:
-  bookdown::pdf_document2:
-    fig_caption: yes
   bookdown::html_document2:
     fig_caption: yes
 team: lorikeet
@@ -173,7 +171,7 @@ chain_investment <- chain_investment %>%
   mutate(GDP_current = GDP_current*1000)
 ```
 
-```{r q6fig1, fig.cap= "The trend of total digital infrastructure investment from 1947 to 2017"}
+```{r q6fig1, fig.cap= "The trend of total digital infrastructure investment from 1947 to 2017", fig.align='center'}
 q6 <- investment %>%
   filter(category == "Total digital infrastructure") %>%
   rename("digital" = gross_inv)
@@ -190,7 +188,7 @@ ggplot(q6,
 ```
 
 
-```{r q6fig2, fig.cap= "The trend of Gross Domestic Product (GDP) from 1947 to 2017"}
+```{r q6fig2, fig.cap= "The trend of Gross Domestic Product (GDP) from 1947 to 2017",fig.align='center'}
 ggplot(q6,
        aes(x = year,
            y = GDP_current)) +
@@ -200,7 +198,7 @@ ggplot(q6,
   ggtitle("The trend of Gross Domestic Product (GDP) from 1947 to 2017")
 ```
 
-```{r q6fig3, fig.cap= "The relationship between total digital investment and gdp"}
+```{r q6fig3, fig.cap= "The relationship between total digital investment and gdp",fig.align='center'}
  ggplot(q6,
        aes(x = digital,
            y = GDP_current)) +
@@ -237,7 +235,7 @@ In Addition, this result same as our expected finding which is a positive relati
 
 **What is the relationship between transportation investment (chained US dollars) and GDP (chained US dollars)?**
 
-```{r q14fig4,fig.cap="The trend of transpotation investment and Gross Domestic Product (GDP) from 1947 to 2017"}
+```{r q14fig4,fig.cap="The trend of transpotation investment and Gross Domestic Product (GDP) from 1947 to 2017",fig.align='center'}
 
 q14 <- chain_investment %>%
    filter(category == "Transportation") %>%
@@ -265,7 +263,7 @@ gdp <- ggplot(q14,
 grid.arrange(transport, gdp, nrow=2)
 ```
 
-```{r q14fig5,fig.cap="The relationship between transportation investment and gdp"}
+```{r q14fig5,fig.cap="The relationship between transportation investment and gdp",fig.align='center'}
  ggplot(q14,
        aes(x = Transportation,
            y = GDP_chain)) +
@@ -302,7 +300,7 @@ This result same as our expected finding that is a positive relationship between
 
 **What is the relationship between GDP and private investment, federal investment？And which one is stronger impact on GDP?**
 
-```{r q18fig6,fig.cap="The trends of private, federal investment and current GDP"}
+```{r q18fig6,fig.cap="The trends of private, federal investment and current GDP",fig.align='center'}
 options(scipen=100, digits=4)
 q18_P1 <- investment %>%
   filter(category == "Private") 
@@ -331,7 +329,7 @@ gg3 <-  ggplot(q18_F,aes(year,gross_inv)) +
 grid.arrange(gg1,gg2,gg3,layout_matrix=rbind(c(1,1),c(2,3)))
 ```
 
-```{r q18fig7, fig.cap="The relationship between investment and GDP"}
+```{r q18fig7, fig.cap="The relationship between investment and GDP",fig.align='center'}
 ggplotRegression <- function (x) {
   ggplot(x$model, aes_string(x = names(x$model)[2], 
                                y = names(x$model)[1])) +
@@ -365,7 +363,7 @@ Therefore, this results same as our expected finding that is the relationship be
 
 **Is there a linear relationship between GDP and total basic infrastructure investment? Positive or negative?**
 
-```{r q20fig8, fig.cap = "The relationship between GDP and total basic infrastructure investment"}
+```{r q20fig8, fig.cap = "The relationship between GDP and total basic infrastructure investment",fig.align='center'}
 q20 <- investment %>%
   filter(category == "Total basic infrastructure")
 
