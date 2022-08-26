@@ -1,13 +1,16 @@
 ---
 title: "ETC5521 Assignment 1"
-subtitle: "Infrastructural Investment in USA"
-team: [lorikeet]
 author:
-  - [Aphiaut Imuan]
-  - [Xintong You]
+- Aphiaut Imuan
+- Xintong You
 date: "`r Sys.Date()`"
-output: 
-  html_document
+output:
+  bookdown::pdf_document2:
+    fig_caption: yes
+  bookdown::html_document2:
+    fig_caption: yes
+team: lorikeet
+subtitle: Infrastructural Investment in USA
 ---
 
 [This assignment is for ETC5521 Assignment 1 by Team `r rmarkdown::metadata$team` comprising of `r knitr::combine_words(rmarkdown::metadata$author)`.]{style="color:#006DAE;"}
@@ -16,6 +19,7 @@ output:
 knitr::opts_chunk$set(echo = FALSE, 
                       message = FALSE, 
                       warning = FALSE)
+options(tinytex.verbose = TRUE)
 library(tidyverse)
 library(ggplot2)
 library(knitr)
@@ -25,6 +29,8 @@ library(kableExtra)
 library(broom)
 library(readxl)
 library(gridExtra)
+library(bookdown)
+library(tinytex)
 ```
 
 ```{r, echo=FALSE}
@@ -167,7 +173,7 @@ chain_investment <- chain_investment %>%
   mutate(GDP_current = GDP_current*1000)
 ```
 
-```{r}
+```{r q6fig1, fig.cap= "The trend of total digital infrastructure investment from 1947 to 2017"}
 q6 <- investment %>%
   filter(category == "Total digital infrastructure") %>%
   rename("digital" = gross_inv)
@@ -180,17 +186,21 @@ ggplot(q6,
   geom_point() +
   geom_vline(xintercept = 1990, linetype="dashed", color = "red")+
   theme_bw() +
-  ggtitle("Figure 1: The trend of total digital infrastructure investment from 1947 to 2017")
+  ggtitle("The trend of total digital infrastructure investment from 1947 to 2017")
+```
 
 
+```{r q6fig2, fig.cap= "The trend of Gross Domestic Product (GDP) from 1947 to 2017"}
 ggplot(q6,
        aes(x = year,
            y = GDP_current)) +
   geom_point() +
   geom_vline(xintercept = 1990, linetype="dashed", color = "red")+
   theme_bw() +
-  ggtitle("Figure 2: The trend of Gross Domestic Product (GDP) from 1947 to 2017")
+  ggtitle("The trend of Gross Domestic Product (GDP) from 1947 to 2017")
+```
 
+```{r q6fig3, fig.cap= "The relationship between total digital investment and gdp"}
  ggplot(q6,
        aes(x = digital,
            y = GDP_current)) +
@@ -200,7 +210,7 @@ ggplot(q6,
   geom_smooth(method = "lm",
               col = "red",
               size = 1)+
-  ggtitle("Figure 3: The relationship between total digital investment and gdp") +
+  ggtitle("The relationship between total digital investment and gdp") +
    theme_bw()
  
  tidy(q6_lm) %>% kable() %>% 
@@ -210,7 +220,7 @@ q6_lm_summary %>% kable() %>%
   kable_classic(full_width = F, html_font = "Cambria")
 
 ```
-Figure 1 shows the positive trend of total digital infrastructure investment, moreover, it is a steeply increasing trend between 1990 and 2017. Although overall the trend is an increasing trend, around 1999 to 2009 are a slight fluctuation. Figure 3 illustrates the proportion increasing between Total digital infrastructure and GDP is 1:1. 
+Figure \@ref(fig:q6fig1) shows the positive trend of total digital infrastructure investment, moreover, it is a steeply increasing trend between 1990 and 2017. Although overall the trend is an increasing trend, around 1999 to 2009 are a slight fluctuation. Figure \@ref(fig:q6fig3) illustrates the proportion increasing between Total digital infrastructure and GDP is 1:1. 
 
 The table of results can be expressed in the formula as:
 
@@ -227,7 +237,7 @@ In Addition, this result same as our expected finding which is a positive relati
 
 **What is the relationship between transportation investment (chained US dollars) and GDP (chained US dollars)?**
 
-```{r}
+```{r q14fig4,fig.cap="The trend of transpotation investment and Gross Domestic Product (GDP) from 1947 to 2017"}
 
 q14 <- chain_investment %>%
    filter(category == "Transportation") %>%
@@ -240,12 +250,9 @@ transport <- ggplot(q14,
            y = Transportation)) +
   geom_point() +
   theme_bw() +
-  ggtitle("Figure 4: The trend of transpotation investment from 1947 to 2017")
+  ggtitle("The trend of transpotation investment from 1947 to 2017")
  # geom_vline(xintercept = 1990, linetype="dashed", color = "red")+
 #  ggtitle("The trend of total digital infrastructure investment from 1947 to 2017")
-
-
-
 
 gdp <- ggplot(q14,
        aes(x = year,
@@ -253,10 +260,12 @@ gdp <- ggplot(q14,
   geom_point() +
   geom_vline(xintercept = 1990, linetype="dashed", color = "red")+
   theme_bw() +
-  ggtitle("Figure 5: The trend of Gross Domestic Product (GDP) from 1947 to 2017")
+  ggtitle("The trend of Gross Domestic Product (GDP) from 1947 to 2017")
 
 grid.arrange(transport, gdp, nrow=2)
+```
 
+```{r q14fig5,fig.cap="The relationship between transportation investment and gdp"}
  ggplot(q14,
        aes(x = Transportation,
            y = GDP_chain)) +
@@ -266,7 +275,7 @@ grid.arrange(transport, gdp, nrow=2)
   geom_smooth(method = "lm",
               col = "red",
               size = 1)+
-  ggtitle("Figure 6: The relationship between transportation investment and gdp") +
+  ggtitle("The relationship between transportation investment and gdp") +
    theme_bw()
  
  tidy(q14_lm)%>% kable() %>% 
@@ -277,7 +286,7 @@ q14_lm_summary%>% kable() %>%
 
 ```
 
-Figure 1 shows the positive trend of transportation investment (chained dollar), however, it is a steeply slight fluctuation between 1968 and 1998. While Gross Domestic Product (chained dollar) is a positive trend and increases over the year. Figure 3 illustrates the relationship between transportation investment (chained dollar) and GDP (chained dollar),  nonetheless, it is difficult to explain the relationship between both variables as linear. 
+Figure \@ref(fig:q14fig4) shows the positive trend of transportation investment (chained dollar), however, it is a steeply slight fluctuation between 1968 and 1998. While Gross Domestic Product (chained dollar) is a positive trend and increases over the year. Figure \@ref(fig:q14fig5) illustrates the relationship between transportation investment (chained dollar) and GDP (chained dollar),  nonetheless, it is difficult to explain the relationship between both variables as linear. 
 
 The table of results can be expressed in the formula as:
 
@@ -293,7 +302,7 @@ This result same as our expected finding that is a positive relationship between
 
 **What is the relationship between GDP and private investment, federal investment？And which one is stronger impact on GDP?**
 
-```{r q18}
+```{r q18fig6,fig.cap="The trends of private, federal investment and current GDP"}
 options(scipen=100, digits=4)
 q18_P1 <- investment %>%
   filter(category == "Private") 
@@ -307,20 +316,22 @@ q18_F <- q18_F1 %>%
 gg1 <- ggplot(q18_P,aes(year,GDP_current)) +
   geom_line(color = "blue") +
   theme_bw() +
-  ggtitle("Figure 7: Trend of current GDP") 
+  ggtitle("Trend of current GDP") 
 
 gg2 <- ggplot(q18_P,aes(year,gross_inv)) +
   geom_line(color="blue") +
   theme_bw()+
-  ggtitle("Figure 8: Trend of gross private investment") 
+  ggtitle("Trend of gross private investment") 
 
 gg3 <-  ggplot(q18_F,aes(year,gross_inv)) +
   geom_line(color="blue") +
   theme_bw() +
-  ggtitle("Figure 9: Trend of gross federal investment") 
+  ggtitle("Trend of gross federal investment") 
   
 grid.arrange(gg1,gg2,gg3,layout_matrix=rbind(c(1,1),c(2,3)))
+```
 
+```{r q18fig7, fig.cap="The relationship between investment and GDP"}
 ggplotRegression <- function (x) {
   ggplot(x$model, aes_string(x = names(x$model)[2], 
                                y = names(x$model)[1])) +
@@ -343,18 +354,18 @@ g2 <- ggplotRegression(lm(GDP_current ~ gross_inv,data = q18_F)) +
 grid.arrange(g1,g2,nrow = 1,top = "Linear relationship between investment and GDP")
 ```
 
-Figure 7 and Figure 8 illustrate the current GDP has a generally increasing trend over time, and the trend of gross private investment is similar to that. While the gross federal investment has fluctuated since around 1980 Figure 9.
+Figure \@ref(fig:q18fig6) illustrates the current GDP has a generally increasing trend over time, and the trend of gross private investment is similar to that. While the gross federal investment has fluctuated since around 1980 Figure 9.
 
 By observing the trends of the three variables, this study predicts the current GDP and the other two might have a linear relationship, then we use a linear model to judge whether they have a linear relationship. As a result, GDP does have a linear relationship with private investment and federal investment respectively, and private investment has a stronger impact on current GDP.
 
-R-squared is an important statistical measure that represents the proportion of the variance for current GDP that is explained by the gross private and federal investment in the regression model. For example, 98.6% of private investment can explain the current GDP, rather only 78.1% of federal investment can explain that. Obviously, there is a stronger linear relationship between GDP and private investment which is unexpected. This result relates to the study of Private investment as the engine of economic growth and social welfare that investigated the private investment can explain the variance of GDP growth rate more than public investment (Doménech & Sicilia, 2021).
+R-squared is an important statistical measure that represents the proportion of the variance for current GDP that is explained by the gross private and federal investment in the regression model. For example, Figure \@ref(fig:q18fig7) shows that 98.6% of private investment can explain the current GDP, rather only 78.1% of federal investment can explain that. Obviously, there is a stronger linear relationship between GDP and private investment which is unexpected. This result relates to the study of Private investment as the engine of economic growth and social welfare that investigated the private investment can explain the variance of GDP growth rate more than public investment (Doménech & Sicilia, 2021).
 
 Therefore, this results same as our expected finding that is the relationship between both variable and GDP is a linear model. However, the R-squared of federal investment is not as expected finding because the R-squared of private investment is much more valuable.
 
 
 **Is there a linear relationship between GDP and total basic infrastructure investment? Positive or negative?**
 
-```{r}
+```{r q20fig8, fig.cap = "The relationship between GDP and total basic infrastructure investment"}
 q20 <- investment %>%
   filter(category == "Total basic infrastructure")
 
@@ -370,7 +381,7 @@ q20_lm_summary%>% kable() %>%
 g3 <- ggplotRegression(lm(GDP_current ~ gross_inv,data = q20)) +
   labs(x = "Total Basic Infrastructure Investment", y = "Current GDP") +
   theme_bw() +
-  ggtitle("Figure 10: Relationship between GDP and total basic infrastructure investment")
+  ggtitle("Relationship between GDP and total basic infrastructure investment")
 g3
 ```
 
@@ -382,14 +393,14 @@ $$
 \end{align*}
 $$
 
-This formula means if transportation investment increases by 1 million US dollars, the Gross Domestic Product will increase by 59.02  million US dollars. Moreover, the distribution of data has a positive linear relationship in figure 10. The trend is increasing because the infrastructure investment effect increases a huge stock of public capital such as developing or creating new roads. That is a direct effect to increase government spending (G) in the GDP formula (Stupak, 2017).  Furthermore, Gunnion (2021) claims that investment in infrastructure is a positive impact on economic output. R-squared is 98.67% of the variance, therefore, the result of the relationship between total basic infrastructure investment and Gross Domestic Product can summary by the linear model. 
+This formula means if transportation investment increases by 1 million US dollars, the Gross Domestic Product will increase by 59.02  million US dollars. Moreover, the distribution of data has a positive linear relationship in figure \@ref(fig:q20fig8). The trend is increasing because the infrastructure investment effect increases a huge stock of public capital such as developing or creating new roads. That is a direct effect to increase government spending (G) in the GDP formula (Stupak, 2017).  Furthermore, Gunnion (2021) claims that investment in infrastructure is a positive impact on economic output. R-squared is 98.67% of the variance, therefore, the result of the relationship between total basic infrastructure investment and Gross Domestic Product can summary by the linear model. 
 
 Additionally, these results can confirm the expected finding is correct by the graph, the result of regression, and R-square.
 
 
 # Conclusion
 
-This study is exploratory infrastructural investment data in the USA. The study has 4 interesting questions from the infrastructural investment data that is presented in the finding, including 1. What is the relationship between total digital investment and GDP? 2. What is the relationship between transportation investment (chained US dollars) and GDP (chained US dollars)? 3. What is the relationship between GDP and private investment, and federal investment？ And which one is the stronger impact on GDP? 4. Is there a linear relationship between GDP and total basic infrastructure investment? Does it a positive or negative? This study investigates the relationship between the total digital investment and GDP as a positive linear. Moreover, the correlative implication between transportation investment (chained US dollars) and GDP (chained US dollars) is a positive linear relationship. Furthermore, each association of private investment, federal investment, and GDP is a positive linear relationship and private investment is a higher effect on GDP than federal investment. In addition, total basic infrastructure investment has a positive linear relationship with GDP.
+This study explores infrastructural investment data in the USA and includes 4 interesting questions about the relationship between different categories of infrastructural investment and GDP. This study investigates the relationship between the total digital investment and GDP as a positive linear. Moreover, the correlative implication between transportation investment (chained US dollars) and GDP (chained US dollars) is a positive linear relationship. Furthermore, each association of private investment, federal investment, and GDP is a positive linear relationship and private investment is a higher effect on GDP than federal investment. In addition, total basic infrastructure investment has a positive linear relationship with GDP. In conclusion, the investment the study includes with GDP is all positive linear relationship, but different investments have different degrees of impact on GDP.
 
 # References
 
