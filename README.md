@@ -6,6 +6,8 @@ Team members:
 
 * [Aphiaut Imuan]
 * [Xintong You]
+* [Harsh Katiyar]
+* [Ishita Khanna]
 
 # Steps
 
