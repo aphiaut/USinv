@@ -131,16 +131,22 @@ The gdplev data set is downloaded from [Bureau of Economic Analysis](https://www
 
 17. **Is there a linear relationship between GDP and total basic infrastructure investment? Positive or negative?**
 
+18. How each category is changed under Transportation from 2000 to 2017?
+
+19. What is the total gross investment ipd for conservation and development in each category?
+
+20. What is the relationship between current GDP and chained GDP?
+
 # Expected findings
 
 
 In question 5: We expect to find the positive relationship between total digital investment and GDP. Moreover we expect to see the steep line from 1900 to 2017.
 
-In question 14: We expect the positive relationship between transportation (chained US dollar) and GDP (chained US dollar). This expected finding can be explained by linear model and there will be high effect value to GDP.
+In question 11: We expect the positive relationship between transportation (chained US dollar) and GDP (chained US dollar). This expected finding can be explained by linear model and there will be high effect value to GDP.
 
-In question 18: We expect to find a strong relationship between GDP and federal investment and there is a positive relation both sides.
+In question 15: We expect to find a strong relationship between GDP and federal investment and there is a positive relation both sides.
 
-In question 20: We expect to find a positive linear relationship between GDP and total basic infrastructure investment.
+In question 17: We expect to find a positive linear relationship between GDP and total basic infrastructure investment.
 
 # Analysis and findings
 
@@ -390,9 +396,50 @@ This formula means if transportation investment increases by 1 million US dollar
 Additionally, these results can confirm the expected finding is correct by the graph, the result of regression, and R-square.
 
 
+# Additional Expected Findings
+
+Question 18. It is expected that there will be an increase in almost all category's GDP except few which according to my assumption might have gone out of use so they are not really affecting GDP.
+
+Question 20. It is expected that the chained GDP will increase the same way the current GDP is increasing because chained GDP is basically the index measure production in one year relative to another.
+
+# Additional Analysis
+
+*How each category is changed under Transportation from 2000 to 2017?*
+
+```{r category}
+change_transportation <- chain_investment %>%
+  filter(meta_cat == "Transportation") %>%
+  filter(between(year, 2000, 2017))
+
+change_transportation %>%
+  ggplot(aes(x= year,
+             y= gross_inv_chain)) +
+  geom_line() +
+  facet_wrap(~ category) +
+  ylab("Chained Gross Investment") +
+  ggtitle("Change in transportation categories from 2000 to 2017")
+```
+\@ref(fig:category) shows the change in each category in the form of grid from year 2000 to 2017 under Transportation. It shows that some of the category remained constant with slow or little change in the chained gross investment but *Highway and streets* and *S&L* have shown a tremendous decrease being the highest invested category of GDP (large amount of money invested in it)
+
+
+*What is the relationship between current GDP and chained GDP?*
+
+```{r GDP_compare}
+gdplev %>%
+  ggplot(aes(x = GDP_current,
+             y = GDP_chain)) + 
+  geom_point(aes(color = year)) +
+  geom_vline(aes(xintercept = mean(GDP_current))) +
+  xlab("Real GDP") +
+  ylab("Measure of GDP") +
+  ggtitle("Relationship between Current and Chained GDP over the years")
+```
+\@ref(fig:GDP_compare) shows the yearly comparison between Real GDP and measure of GDP over the years. It is visible that in starting of the graph there is 0 GDP that is around 1920s. The horizontal line represents the average of Real GDP to see what is average GDP invested over the years and where the current GDP is lying (how far from the average). But I think the average is basically lined up because of 0 GDP in the starting of the years as most of the points lie there.
+
 # Conclusion
 
 This study explores infrastructural investment data in the USA and includes 4 interesting questions about the relationship between different categories of infrastructural investment and GDP. This study investigates the relationship between the total digital investment and GDP as a positive linear. Moreover, the correlative implication between transportation investment (chained US dollars) and GDP (chained US dollars) is a positive linear relationship. Furthermore, each association of private investment, federal investment, and GDP is a positive linear relationship and private investment is a higher effect on GDP than federal investment. In addition, total basic infrastructure investment has a positive linear relationship with GDP. In conclusion, the investment the study includes with GDP is all positive linear relationship, but different investments have different degrees of impact on GDP.
+
 
 # References
 
