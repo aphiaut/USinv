@@ -3,6 +3,8 @@ title: "ETC5521 Assignment 1"
 author:
 - Aphiaut Imuan
 - Xintong You
+- Harsh Katiyar
+- Ishita Khanna
 date: "`r Sys.Date()`"
 output:
   bookdown::html_document2:
@@ -29,6 +31,8 @@ library(readxl)
 library(gridExtra)
 library(bookdown)
 library(tinytex)
+library(DT)
+library(plotly)
 ```
 
 ```{r, echo=FALSE}
@@ -57,40 +61,79 @@ As mentioned above, the case study should be of USA's infrastructure because USA
 # Data description
 
 
-The data comes from [Bureau of Economic Analysis](https://www.bea.gov/system/files/papers/BEA-WP2020-12.pdf). The raw .xlsx file is included or it can be downloaded directly from [BEA Working paper series](https://www.bea.gov/system/files/2021-01/infrastructure-data-may-2020.xlsx).
+The data comes from [Bureau of Economic Analysis](https://www.bea.gov/system/files/papers/BEA-WP2020-12.pdf). The raw .xlsx file is included, or can be downloaded directly from the [BEA Working paper series](https://www.bea.gov/system/files/2021-01/infrastructure-data-may-2020.xlsx).
 
-3 primary data sets are already cleaned and saved as .csv files and they all have five variables. Four out the variables are described below:
+There are 3 primary data sets are already cleaned and saved as .csv files and they all have five variables.
 
-```{r, echo=FALSE}
-variable <- c("category","meta_cat","group_num","year")
-class <- c("character","character","double","double")
-description <- c("Category of investment",
-                 "Group category of investment",
-                 "Group number of investment",
-                 "Year of investment")
-e.g. <- c("Private,Federal...","Total infrastructure,Water supply,GDP...","1,2,3...","1947,1948,1949...")
-dic<- data.frame(variable, class,description, e.g.)
-
-kable(dic,
-      align = "llll","pipe")
-```
-
-The 3 data sets record gross investment, chained investment (USD in millions) and Implicit Price Deflators (IPDs) respectively.
+**For investment dataset-**
 
 ```{r, echo=FALSE}
-variable <- c("gross_inv","gross_inv_chain","gross_inv_ipd")
-class <- c("double","double","double")
-description <- c("Gross investment in millions of USD",
-                 "Gross investment (chained 2021 dollars) in millions of USD",
-                 "Implicit Price Deflators (IPDs) An implicit price deflator is the ratio of the current-dollar value of a series, such as gross domestic product (GDP), to its corresponding chained-dollar value, multiplied by 100.")
-dic2 <- data.frame(variable,class,description) 
+tibble(
+  "Variable" = colnames(investment),
+  "Class" = c("character", "character",
+              "number","number","number"
+              ),
+  "Description" = c("Category of Investment",
+                    "Group Category of Investment", 
+                    "Group number of investment",
+                    "Year of investment", 
+                    "Gross investment in millions of USD")
+  ) %>%
+  datatable()
+```
 
-kable(dic2,
-      align = "lll","pipe")
+**For Chain Investment-**
+
+```{r}
+tibble(
+  "Variable" = colnames(chain_investment),
+  "Class" = c("character", "character",
+              "number","number","number"
+              ),
+  "Description" = c("Category of Investment",
+                    "Group Category of Investment", 
+                    "Group number of investment",
+                    "Year of investment", 
+                    "	Gross investment (chained 2021 dollars) in millions of USD.")
+  ) %>%
+  datatable()
+```
+
+**For IPD (Implicit Price Deflators) -** 
+
+```{r}
+tibble(
+  "Variable" = colnames(ipd),
+  "Class" = c("character", "character",
+              "number","number","number"
+              ),
+  "Description" = c("Category of Investment",
+                    "Group Category of Investment", 
+                    "Group number of investment",
+                    "Year of investment", 
+                    "Implicit Price Deflators (IPDs) An implicit price deflator is the ratio of the current-dollar value of a series, such as gross domestic product (GDP), to its corresponding chained-dollar value, multiplied by 100.")
+  ) %>%
+  datatable()
+```
+
+
+
+The gdplev data set is downloaded from [Bureau of Economic Analysis](https://www.bea.gov/data/gdp/gross-domestic-product), which is a supplementary data set for our analysis. It records the current GDP and chain GDP in US from 1929 to 2021. Its variable contains year, GDP_current and GDP_chain whose type is all double.
+
+**For gdplev data set -**
+
+```{r}
+tibble(
+  "Variable" = colnames(gdplev),
+  "Class" = c("number","number","number"),
+  "Description" = c("Year",
+                    "GDP in billions of current dollars", 
+                    "GDP in billions of chained 2012 dollars")
+  ) %>%
+  datatable()
 
 ```
 
-The gdplev data set is downloaded from [Bureau of Economic Analysis](https://www.bea.gov/data/gdp/gross-domestic-product), which is a supplementary data set for our analysis. It records the current GDP and chain GDP in US from 1929 to 2021. Vaariables in this dataset are *year*, *GDP_current* and *GDP_chain* whose datatype is double.
 
 - Chained dollars: Chained dollars is a method of adjusting real dollar amounts for inflation over time, to allow the comparison of figures from different years. The U.S. Department of Commerce introduced the chained-dollar measure in 1996.
 
@@ -131,22 +174,38 @@ The gdplev data set is downloaded from [Bureau of Economic Analysis](https://www
 
 17. **Is there a linear relationship between GDP and total basic infrastructure investment? Positive or negative?**
 
-18. How each category is changed under Transportation from 2000 to 2017?
+### **NEW QUESTIONS OF INTEREST**
 
-19. What is the total gross investment ipd for conservation and development in each category?
+18. **How each category is changed under Transportation from 2000 to 2017?**
 
-20. What is the relationship between current GDP and chained GDP?
+19. **What is the total gross investment ipd for conservation and development in each category?**
+
+20. **What is the relationship between current GDP and chained GDP?**
+
+21. **Is there any relationship between average gross investment and average GDP for each year from 1947 to 2017?**
+
+22. **Did all the group categories get equal amount of investment by the government in the last 5 years (according to the data i.e. from 2013 to 2017)?**
+
 
 # Expected findings
 
 
-In question 5: We expect to find the positive relationship between total digital investment and GDP. Moreover we expect to see the steep line from 1900 to 2017.
+**In question 5**: We expect to find the positive relationship between total digital investment and GDP. Moreover we expect to see the steep line from 1900 to 2017.
 
-In question 11: We expect the positive relationship between transportation (chained US dollar) and GDP (chained US dollar). This expected finding can be explained by linear model and there will be high effect value to GDP.
+**In question 11**: We expect the positive relationship between transportation (chained US dollar) and GDP (chained US dollar). This expected finding can be explained by linear model and there will be high effect value to GDP.
 
-In question 15: We expect to find a strong relationship between GDP and federal investment and there is a positive relation both sides.
+**In question 15**: We expect to find a strong relationship between GDP and federal investment and there is a positive relation both sides.
 
-In question 17: We expect to find a positive linear relationship between GDP and total basic infrastructure investment.
+**In question 17**: We expect to find a positive linear relationship between GDP and total basic infrastructure investment.
+
+**In Question 18**. It is expected that there will be an increase in almost all category's GDP except few which according to my assumption might have gone out of use so they are not really affecting GDP.
+
+**In Question 20**. It is expected that the chained GDP will increase the same way the current GDP is increasing because chained GDP is basically the index measure production in one year relative to another.
+
+**In Question 21**. We expect that there should be a relationship between GDP and Gross Investment because if government is investing more in various sectors then the government is also expecting to get more from all these sectors and that should affect the GDP directly.
+
+**In Question 22**: We expect that all the group categories did not get the same amount of investment because all the group are not equally important from government's point of view.
+
 
 # Analysis and findings
 
@@ -155,24 +214,22 @@ In question 17: We expect to find a positive linear relationship between GDP and
 This study uses the linear model to analyze because linear models are simple and present a mathematical equation which is easy to interpret and can make predictions. Moreover, linear regression model is a reliable predictor because it is a long established statistical procedure  and the character of linear regression is easy to understand. (IBM, 2022).
 
 
-**What is the relationship between total digital investment and GDP?**
+**QUESTION-5 What is the relationship between total digital investment and GDP?**
 
 ```{r}
-investment <- investment %>%
+investment1 <- investment %>%
   left_join(gdplev, by = "year") 
-investment <- investment %>%
-  mutate(GDP_current = GDP_current*1000)
 
 
-chain_investment <- chain_investment %>%
+
+chain_investment1 <- chain_investment %>%
   left_join(gdplev, by = "year")
 
-chain_investment <- chain_investment %>%
-  mutate(GDP_current = GDP_current*1000)
+
 ```
 
 ```{r q6fig1, fig.cap= "The trend of total digital infrastructure investment from 1947 to 2017", fig.align='center'}
-q6 <- investment %>%
+q6 <- investment1 %>%
   filter(category == "Total digital infrastructure") %>%
   rename("digital" = gross_inv)
   
@@ -184,7 +241,9 @@ ggplot(q6,
   geom_point() +
   geom_vline(xintercept = 1990, linetype="dashed", color = "red")+
   theme_bw() +
-  ggtitle("The trend of total digital infrastructure investment from 1947 to 2017")
+  ggtitle("The trend of total digital infrastructure investment from 1947 to 2017") +
+   labs(x = "Year") + 
+  labs(y = "Total investment (Digital) in millions USD")
 ```
 
 
@@ -195,7 +254,9 @@ ggplot(q6,
   geom_point() +
   geom_vline(xintercept = 1990, linetype="dashed", color = "red")+
   theme_bw() +
-  ggtitle("The trend of Gross Domestic Product (GDP) from 1947 to 2017")
+  ggtitle("The trend of Gross Domestic Product (GDP) from 1947 to 2017") + 
+   labs(x = "Year") + 
+  labs(y = "GDP in billions of current dollars")
 ```
 
 ```{r q6fig3, fig.cap= "The relationship between total digital investment and gdp",fig.align='center'}
@@ -209,7 +270,9 @@ ggplot(q6,
               col = "red",
               size = 1)+
   ggtitle("The relationship between total digital investment and gdp") +
-   theme_bw()
+   theme_bw() + 
+   labs(x = "Total investment (Digital) in millions USD") + 
+  labs(y = "GDP in billions of current dollars")
  
  tidy(q6_lm) %>% kable() %>% 
   kable_classic(full_width = F, html_font = "Cambria")
@@ -218,7 +281,8 @@ q6_lm_summary %>% kable() %>%
   kable_classic(full_width = F, html_font = "Cambria")
 
 ```
-Figure \@ref(fig:q6fig1) shows the positive trend of total digital infrastructure investment. Moreover, it has a steeply increasing trend from 1990 to 2017. Overall there is an increasing trend but around 1999 to 2009 there is a slight fluctuation. Figure \@ref(fig:q6fig3) illustrates the proportional increase between Total digital infrastructure and GDP which is 1:1. 
+
+Figure \@ref(fig:q6fig1) shows the positive trend of total digital infrastructure investment, moreover, it is a steeply increasing trend between 1990 and 2017. Although overall the trend is an increasing trend, around 1999 to 2009 are a slight fluctuation. Figure \@ref(fig:q6fig3) illustrates the proportion increasing between Total digital infrastructure and GDP is 1:1. 
 
 The table of results can be expressed in the formula as:
 
@@ -233,11 +297,11 @@ This formula means if total digital infrastructure increases by 1 million US dol
 In Addition, this resulted same as our expected finding which was a positive relationship between total digital infrastructure and GDP. However, the trend of Total digital infrastructure has steeply increased since 1990 and GDP's has steeply increased since 1980. It means total digital infrastructure doesn't significantly affect GDP from 1980 to 1990.
 
 
-**What is the relationship between transportation investment (chained US dollars) and GDP (chained US dollars)?**
+**QUESTION-11 What is the relationship between transportation investment (chained US dollars) and GDP (chained US dollars)?**
 
 ```{r q14fig4,fig.cap="The trend of transpotation investment and Gross Domestic Product (GDP) from 1947 to 2017",fig.align='center'}
 
-q14 <- chain_investment %>%
+q14 <- chain_investment1 %>%
    filter(category == "Transportation") %>%
    pivot_wider(names_from = category, values_from = gross_inv_chain)
 
@@ -248,7 +312,9 @@ transport <- ggplot(q14,
            y = Transportation)) +
   geom_point() +
   theme_bw() +
-  ggtitle("The trend of transpotation investment from 1947 to 2017")
+  ggtitle("The trend of transpotation investment from 1947 to 2017") + 
+   labs(x = "Year") + 
+  labs(y = "Transportation (millions USD)")
  # geom_vline(xintercept = 1990, linetype="dashed", color = "red")+
 #  ggtitle("The trend of total digital infrastructure investment from 1947 to 2017")
 
@@ -258,7 +324,9 @@ gdp <- ggplot(q14,
   geom_point() +
   geom_vline(xintercept = 1990, linetype="dashed", color = "red")+
   theme_bw() +
-  ggtitle("The trend of Gross Domestic Product (GDP) from 1947 to 2017")
+  ggtitle("The trend of Gross Domestic Product (GDP) from 1947 to 2017") + 
+   labs(x = "Year") + 
+  labs(y = "GDP(chained) in Billion USD")
 
 grid.arrange(transport, gdp, nrow=2)
 ```
@@ -274,17 +342,21 @@ grid.arrange(transport, gdp, nrow=2)
               col = "red",
               size = 1)+
   ggtitle("The relationship between transportation investment and gdp") +
-   theme_bw()
+   theme_bw() + 
+  labs(x = "Total investment (Transportation) in million USD") + 
+  labs(y = "GDP chained(2012) in billion USD")
  
  tidy(q14_lm)%>% kable() %>% 
   kable_classic(full_width = F, html_font = "Cambria")
 q14_lm_summary <- glance(q14_lm)
 q14_lm_summary%>% kable() %>% 
-  kable_classic(full_width = F, html_font = "Cambria")
+  kable_classic(full_width = F, html_font = "Cambria")  
+   
+
 
 ```
 
-Figure \@ref(fig:q14fig4) shows the positive trend of transportation investment (chained dollar), however, there is a slight steep fluctuation between 1968 and 1998. While Gross Domestic Product (chained dollar) has a positive trend and increases over the years. Figure \@ref(fig:q14fig5) illustrates the relationship between transportation investment (chained dollar) and GDP (chained dollar),  nonetheless, it is difficult to explain the relationship between both variables as linear. 
+Figure \@ref(fig:q14fig4) shows the positive trend of transportation investment (chained dollar), however, it is a steeply slight fluctuation between 1968 and 1998. While Gross Domestic Product (chained dollar) is a positive trend and increases over the year. Figure \@ref(fig:q14fig5) illustrates the relationship between transportation investment (chained dollar) and GDP (chained dollar),  nonetheless, it is difficult to explain the relationship between both variables as linear. 
 
 The table of results can be expressed in the formula as:
 
@@ -298,15 +370,15 @@ This formula means if transportation investment increases by 1 million chained U
 
 This result same as our expected finding that is a positive relationship between transportation investment (chained dollar) and Gross Domestic Product (chained dollar). However, this relationship can not explain by the linear model and the coefficient is too low which is not the same as our expected finding.
 
-**What is the relationship between GDP and private investment, federal investment？And which one is stronger impact on GDP?**
+**QUESTION-15 What is the relationship between GDP and private investment, federal investment？And which one is stronger impact on GDP?**
 
 ```{r q18fig6,fig.cap="The trends of private, federal investment and current GDP",fig.align='center'}
 options(scipen=100, digits=4)
-q18_P1 <- investment %>%
+q18_P1 <- investment1 %>%
   filter(category == "Private") 
 q18_P <- q18_P1 %>%
   filter(meta_cat == "Total infrastructure")
-q18_F1 <- investment %>%
+q18_F1 <- investment1 %>%
   filter(category == "Federal")
 q18_F <- q18_F1 %>%
   filter(meta_cat == "Total infrastructure")
@@ -314,17 +386,23 @@ q18_F <- q18_F1 %>%
 gg1 <- ggplot(q18_P,aes(year,GDP_current)) +
   geom_line(color = "blue") +
   theme_bw() +
-  ggtitle("Trend of current GDP") 
+  ggtitle("Trend of GDP in current USD (in Bllions)") +
+  labs(x = "Year") + 
+  labs(y = "GDP in billions of current USD")
 
 gg2 <- ggplot(q18_P,aes(year,gross_inv)) +
   geom_line(color="blue") +
   theme_bw()+
-  ggtitle("Trend of gross private investment") 
+  ggtitle("Trend of gross private investment") +
+  labs(x = "Year") + 
+  labs(y = "Gross PVT Inv.(million USD)")
 
 gg3 <-  ggplot(q18_F,aes(year,gross_inv)) +
   geom_line(color="blue") +
   theme_bw() +
-  ggtitle("Trend of gross federal investment") 
+  ggtitle("Trend of gross federal investment") +
+  labs(x = "Year") + 
+  labs(y = "Gross FED. Inv.(million USD)")
   
 grid.arrange(gg1,gg2,gg3,layout_matrix=rbind(c(1,1),c(2,3)))
 ```
@@ -343,28 +421,29 @@ ggplotRegression <- function (x) {
 }
 
 g1 <- ggplotRegression(lm(GDP_current ~ gross_inv,data = q18_P)) +
-  labs(x = "Gross Private Investment", y = "Current GDP") +
-  theme_bw()
+  labs(x = "Gross Private Investment in million USD", y = "GDP in Current USD") +
+  theme_bw() 
+  
 g2 <- ggplotRegression(lm(GDP_current ~ gross_inv,data = q18_F)) +
-  labs(x = "Gross Federal Investment", y = "Current GDP") +
+  labs(x = "Gross Federal Investment in million USD", y = "GDP in Current USD") +
   theme_bw()
 
 grid.arrange(g1,g2,nrow = 1)
 ```
 
-Figure \@ref(fig:q18fig6) illustrates that the current GDP is generally increasing over time, and the trend of gross private investment is similar to that. While the gross federal investment is fluctuating since 1980 Figure 9.
+Figure \@ref(fig:q18fig6) illustrates the current GDP has a generally increasing trend over time, and the trend of gross private investment is similar to that. While the gross federal investment has fluctuated since around 1980 Figure 9.
 
-By observing the trends of the three variables, this study predicts the current GDP and the other two might have a linear relationship, then we use the linear model to judge whether they have a linear relationship. As a result, GDP does have a linear relationship with private investment and federal investment respectively, and private investment has a stronger impact on current GDP.
+By observing the trends of the three variables, this study predicts the current GDP and the other two might have a linear relationship, then we use a linear model to judge whether they have a linear relationship. As a result, GDP does have a linear relationship with private investment and federal investment respectively, and private investment has a stronger impact on current GDP.
 
 R-squared is an important statistical measure that represents the proportion of the variance for current GDP that is explained by the gross private and federal investment in the regression model. For example, Figure \@ref(fig:q18fig7) shows that 98.6% of private investment can explain the current GDP, rather only 78.1% of federal investment can explain that. Obviously, there is a stronger linear relationship between GDP and private investment which is unexpected. This result relates to the study of Private investment as the engine of economic growth and social welfare that investigated the private investment can explain the variance of GDP growth rate more than public investment (Doménech & Sicilia, 2021).
 
 Therefore, this results same as our expected finding that is the relationship between both variable and GDP is a linear model. However, the R-squared of federal investment is not as expected finding because the R-squared of private investment is much more valuable.
 
 
-**Is there a linear relationship between GDP and total basic infrastructure investment? Positive or negative?**
+**QUESTION-17 Is there a linear relationship between GDP and total basic infrastructure investment? Positive or negative?**
 
 ```{r q20fig8, fig.cap = "The relationship between GDP and total basic infrastructure investment",fig.align='center'}
-q20 <- investment %>%
+q20 <- investment1 %>%
   filter(category == "Total basic infrastructure")
 
 q20_lm <-lm(GDP_current ~ gross_inv, data = q20)
@@ -377,7 +456,7 @@ q20_lm_summary%>% kable() %>%
 
 
 g3 <- ggplotRegression(lm(GDP_current ~ gross_inv,data = q20)) +
-  labs(x = "Total Basic Infrastructure Investment", y = "Current GDP") +
+  labs(x = "Total Basic Infrastructure Investment in million USD", y = "GDP in Current USD") +
   theme_bw() +
   ggtitle("Relationship between GDP and total basic infrastructure investment")
 g3
@@ -396,17 +475,11 @@ This formula means if transportation investment increases by 1 million US dollar
 Additionally, these results can confirm the expected finding is correct by the graph, the result of regression, and R-square.
 
 
-# Additional Expected Findings
+## Additional Analysis
 
-Question 18. It is expected that there will be an increase in almost all category's GDP except few which according to my assumption might have gone out of use so they are not really affecting GDP.
+**QUESTION-18 How each category is changed under Transportation from 2000 to 2017?**
 
-Question 20. It is expected that the chained GDP will increase the same way the current GDP is increasing because chained GDP is basically the index measure production in one year relative to another.
-
-# Additional Analysis
-
-*How each category is changed under Transportation from 2000 to 2017?*
-
-```{r category}
+```{r category, fig.cap="Change in transportation categories from 2000 to 2017"}
 change_transportation <- chain_investment %>%
   filter(meta_cat == "Transportation") %>%
   filter(between(year, 2000, 2017))
@@ -419,73 +492,140 @@ change_transportation %>%
   ylab("Chained Gross Investment") +
   ggtitle("Change in transportation categories from 2000 to 2017")
 ```
+
 \@ref(fig:category) shows the change in each category in the form of grid from year 2000 to 2017 under Transportation. It shows that some of the category remained constant with slow or little change in the chained gross investment but *Highway and streets* and *S&L* have shown a tremendous decrease being the highest invested category of GDP (large amount of money invested in it)
 
 
-*What is the relationship between current GDP and chained GDP?*
+**QUESTION-20 What is the relationship between current GDP and chained GDP?**
 
-```{r GDP_compare}
+```{r GDP-compare, fig.cap="Relationship between Current and Chained GDP over the years"}
 gdplev %>%
   ggplot(aes(x = GDP_current,
              y = GDP_chain)) + 
   geom_point(aes(color = year)) +
   geom_vline(aes(xintercept = mean(GDP_current))) +
-  xlab("Real GDP") +
-  ylab("Measure of GDP") +
+  xlab("GDP  in current billion USD") +
+  ylab("GDP in chained (2012) USD in billions") +
   ggtitle("Relationship between Current and Chained GDP over the years")
+
 ```
-\@ref(fig:GDP_compare) shows the yearly comparison between Real GDP and measure of GDP over the years. It is visible that in starting of the graph there is 0 GDP that is around 1920s. The horizontal line represents the average of Real GDP to see what is average GDP invested over the years and where the current GDP is lying (how far from the average). But I think the average is basically lined up because of 0 GDP in the starting of the years as most of the points lie there.
+
+\@ref(fig:GDP-compare) shows the yearly comparison between GDP in current USD and Chained GDP over the years. It is visible that in starting of the graph there is very low GDP that is around 1920s. The vertical line represents the average of Real GDP to see what is average GDP invested over the years and where the current GDP is lying (how far from the average). But I think the average is basically lined up because of very low GDP in the starting of the years as most of the points lie there.
+
+
+**QUESTION-21 Is there any relationship between average gross investment and average GDP for each year from 1947 to 2017?**
+
+```{r p1, fig.cap="Average GDP and Average gross investment from 1947 to 2017"}
+
+analysis2 <- investment1 %>%
+  group_by(year) %>%
+  summarise(Average_gross_investment = mean(gross_inv, na.rm = TRUE), Average_GDP = mean(GDP_current, na.rm = TRUE))
+
+analysis2Table <- analysis2 %>%
+  kable(caption = "Average gross investment and GDP per year from 1947 to 2017", align = "c") %>%
+  kable_styling(full_width = F, 
+                bootstrap_options = c("striped", "condensed", "bordered"))
+
+analysis2Table
+
+p2 <- ggplot(analysis2, aes(Average_GDP,
+                            Average_gross_investment)) + 
+  geom_point() + 
+  geom_smooth(method = "lm") + 
+  theme_dark() + 
+  labs(x = "Average GDP in current Billion Dollars") + 
+  labs(y = "Average gross investment in million USD")
+  
+ggplotly(p2)
+```
+
+From the above table \@ref(tab:p1) and plot \@ref(fig:p1), we can say that with increase in time, government is increasing overall investments on various sectors and as a result of which GDP is also increasing. This coincides with our expected result.
+
+
+**QUESTION-22  Did all the group categories get equal amount of investment by the government in the last 5 years (according to the data i.e. from 2013 to 2017)?**
+
+```{r p2, fig.cap="Average investment in million USD in different sectors from 2013 to 2017"}
+analysis1 <- investment %>% 
+  filter(year %in% c(2013:2017), meta_cat != "Total infrastructure") %>%
+  rename(Group_Categories = "meta_cat") %>%
+  group_by(Group_Categories, year) %>%
+  summarise(Average_investment = mean(gross_inv))
+
+p1 <- ggplot(analysis1, aes(year,
+                            Average_investment,
+                            fill = Group_Categories)) +
+  geom_col(position = "dodge") +
+   labs(x = "Year") + 
+  labs(y = "Average investment in million USD")
+
+
+ggplotly(p1)
+```
+
+
+We expected that all the departments are not equally important from the government's point of view and the government invests more in more important sectors like **POWER**, **SOCIAL**, **BASIC INFRASTRUCTURE**, **DIGITAL**, etc. but surprisingly, in the above Figure \@ref(fig:p2) USA invests much less in **NATURAL GAS/PETROLEUM POWER** as expected because USA is the largest producer of oil and gas according to [NASDAQ](https://www.nasdaq.com/articles/what-countries-are-the-top-producers-of-oil).  
+
 
 # Conclusion
 
 This study explores infrastructural investment data in the USA and includes 4 interesting questions about the relationship between different categories of infrastructural investment and GDP. This study investigates the relationship between the total digital investment and GDP as a positive linear. Moreover, the correlative implication between transportation investment (chained US dollars) and GDP (chained US dollars) is a positive linear relationship. Furthermore, each association of private investment, federal investment, and GDP is a positive linear relationship and private investment is a higher effect on GDP than federal investment. In addition, total basic infrastructure investment has a positive linear relationship with GDP. In conclusion, the investment the study includes with GDP is all positive linear relationship, but different investments have different degrees of impact on GDP.
 
+We concluded that there was not much change in investment amounts in Transportation sector between 2000 and 2017 and also there is almost a linear relationship between chained GDP and GDP in current dollars.
+
+We also concluded that USA started investing more in different sectors over the years and as a result we witnessed increase in the GDP of the country. Also, USA invests in most of its major sectors but still there are few major sectors in which USA invests much less as expected like **Natural gas/Petroleum Power** sector because USA is the largest oil and gas producer in the world.
+
 
 # References
 
-Auguie B (2017). _gridExtra: Miscellaneous Functions for "Grid" Graphics_. R package
+- Auguie B (2017). _gridExtra: Miscellaneous Functions for "Grid" Graphics_. R package
   version 2.3, <https://CRAN.R-project.org/package=gridExtra>.
 
-Doménech, R., & Sicilia, J. (2021). Private investment as the engine of economic growth and social welfare / Private investment as the engine of economic growth and social welfare. https://www.bbvaresearch.com/wp-content/uploads/2021/04/EWPrivate_Investment_and_GDP_growthWB.pdf
+- Doménech, R., & Sicilia, J. (2021). Private investment as the engine of economic growth and social welfare / Private investment as the engine of economic growth and social welfare. https://www.bbvaresearch.com/wp-content/uploads/2021/04/EWPrivate_Investment_and_GDP_growthWB.pdf
 
-Garrett Grolemund, Hadley Wickham (2011). Dates and Times Made Easy with lubridate.
+- Garrett Grolemund, Hadley Wickham (2011). Dates and Times Made Easy with lubridate.
   Journal of Statistical Software, 40(3), 1-25. URL https://www.jstatsoft.org/v40/i03/.
 
-Gunnion, L. (2021, July). What does infrastructure investment mean for the US economy? Deloitte Insights. https://www2.deloitte.com/us/en/insights/economy/spotlight/impact-of-us-infrastructure-investment.html
+- Gunnion, L. (2021, July). What does infrastructure investment mean for the US economy? Deloitte Insights. https://www2.deloitte.com/us/en/insights/economy/spotlight/impact-of-us-infrastructure-investment.html
 
-H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York, 2016.
+- H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York, 2016.
 
-IBM. (2022). About Linear Regression | IBM. Www.ibm.com. https://www.ibm.com/topics/linear-regression
+- IBM. (2022). About Linear Regression | IBM. Www.ibm.com. https://www.ibm.com/topics/linear-regression
 
-Lin, X. (2020). Multiple pathways of transportation investment to promote economic growth in China: a structural equation modeling perspective. Transportation Letters, 12(7), 471–482. https://doi.org/10.1080/19427867.2019.1635780
+- Lin, X. (2020). Multiple pathways of transportation investment to promote economic growth in China: a structural equation modeling perspective. Transportation Letters, 12(7), 471–482. https://doi.org/10.1080/19427867.2019.1635780
 
-Pebesma, E., 2018. Simple Features for R: Standardized Support for Spatial Vector Data.
+- Pebesma, E., 2018. Simple Features for R: Standardized Support for Spatial Vector Data.
   The R Journal 10 (1), 439-446, https://doi.org/10.32614/RJ-2018-009
   
-Robinson D, Hayes A, Couch S (2022). _broom: Convert Statistical Objects into Tidy
+- Robinson D, Hayes A, Couch S (2022). _broom: Convert Statistical Objects into Tidy
   Tibbles_. R package version 1.0.0, <https://CRAN.R-project.org/package=broom>.  
 
-Stupak, J. (2017). Economic Impact of Infrastructure Investment. https://ecommons.cornell.edu/bitstream/handle/1813/78289/CRS_Economic_Impact_of_Infrastructure_Investment_0717.pdf?sequence=1&isAllowed=y
+- Stupak, J. (2017). Economic Impact of Infrastructure Investment. https://ecommons.cornell.edu/bitstream/handle/1813/78289/CRS_Economic_Impact_of_Infrastructure_Investment_0717.pdf?sequence=1&isAllowed=y
 
-Wickham H, Averick M, Bryan J, Chang W, McGowan LD, François R, Grolemund G, Hayes A,
+- Wickham H, Averick M, Bryan J, Chang W, McGowan LD, François R, Grolemund G, Hayes A,
   Henry L, Hester J, Kuhn M, Pedersen TL, Miller E, Bache SM, Müller K, Ooms J, Robinson
   D, Seidel DP, Spinu V, Takahashi K, Vaughan D, Wilke C, Woo K, Yutani H (2019). “Welcome
   to the tidyverse.” _Journal of Open Source Software_, *4*(43), 1686.
   doi:10.21105/joss.01686 <https://doi.org/10.21105/joss.01686>.
   
-Wickham H, Bryan J (2022). _readxl: Read Excel Files_. R package version 1.4.0,
+- Wickham H, Bryan J (2022). _readxl: Read Excel Files_. R package version 1.4.0,
   <https://CRAN.R-project.org/package=readxl>.
 
-Weisbrod, G., & Reno, A. (2009). ECONOMIC IMPACT OF PUBLIC TRANSPORTATION INVESTMENT. https://onlinepubs.trb.org/onlinepubs/tcrp/docs/TCRPJ-11Task7-FR.pdf
+- Weisbrod, G., & Reno, A. (2009). ECONOMIC IMPACT OF PUBLIC TRANSPORTATION INVESTMENT. https://onlinepubs.trb.org/onlinepubs/tcrp/docs/TCRPJ-11Task7-FR.pdf
 
-Yihui Xie (2022). knitr: A General-Purpose Package for Dynamic Report Generation in R. R
+- Yihui Xie (2022). knitr: A General-Purpose Package for Dynamic Report Generation in R. R
   package version 1.39.
 
-Zhang, J., Zhao, W., Cheng, B., Li, A., Wang, Y., Yang, N., & Tian, Y. (2022). The Impact of Digital Economy on the Economic Growth and the Development Strategies in the post-COVID-19 Era: Evidence From Countries Along the “Belt and Road.” Frontiers in Public Health, 10. https://doi.org/10.3389/fpubh.2022.856142
+- Zhang, J., Zhao, W., Cheng, B., Li, A., Wang, Y., Yang, N., & Tian, Y. (2022). The Impact of Digital Economy on the Economic Growth and the   Development Strategies in the post-COVID-19 Era: Evidence From Countries Along the “Belt and Road.” Frontiers in Public Health, 10. https://doi.org/10.3389/fpubh.2022.856142
 
-Zhu H (2021). _kableExtra: Construct Complex Table with 'kable' and Pipe Syntax_. R
+- Zhu H (2021). _kableExtra: Construct Complex Table with 'kable' and Pipe Syntax_. R
   package version 1.3.4, <https://CRAN.R-project.org/package=kableExtra>.
 
+-  Xie Y, Cheng J, Tan X (2022). _DT: A Wrapper of the JavaScript Library 'DataTables'_. R package version 0.24,
+  <https://CRAN.R-project.org/package=DT>.
+  
+-  C. Sievert. Interactive Web-Based Data Visualization with R, plotly, and shiny. Chapman and Hall/CRC Florida, 2020.
+
+-  Bajpai, P. (2022, March 15). What Countries Are the Top Producers of Oil? Nasdaq.com. https://www.nasdaq.com/articles/what-countries-are-the-top-producers-of-oil
 
 <details>
 <summary>Session information</summary>
