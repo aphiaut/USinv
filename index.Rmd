@@ -48,18 +48,18 @@ gdplev <- gdplev %>%
 # Introduction and motivation
 
 
-Infrastructure investment is an important core of the country. It includes federal investments such as water suppliers and a private sector investment that manages electricity. It also includes the cost of research and development in technology.
+Infrastructure investment is an important part of the country. It includes federal investments such as water suppliers and private sector investments that manages electricity. It also includes the cost of research and development in technology.
 
-Moreover, infrastructure investment plays a role in supporting both businesses and households. For example, the development of logistics has resulted in businesses reducing transportation costs. Households can access infrastructure services and can choose to use them. It also has a positive effect on both short-term and long-term economic growth [(Stupak, 2017)](https://ecommons.cornell.edu/bitstream/handle/1813/78289/CRS_Economic_Impact_of_Infrastructure_Investment_0717.pdf?sequence=1&isAllowed=y).
+Moreover, infrastructure investment plays a role in supporting both businesses and households. For example, the development of logistics in business sector has resulted in reduction of transportation cost. Households can access infrastructure services and can choose what and how to use. It also has a positive affect on both short-term and long-term economic growth. [(Stupak, 2017)](https://ecommons.cornell.edu/bitstream/handle/1813/78289/CRS_Economic_Impact_of_Infrastructure_Investment_0717.pdf?sequence=1&isAllowed=y)
 
-The above mentioned, the case study of infrastructure should be USA because the USA is a big country, has a large population, and people can access infrastructure services. Furthermore, the USA is also the world's largest economy. 
+As mentioned above, the case study should be of USA's infrastructure because USA is a big country. It has large population, and people can access infrastructure services easily. Furthermore, USA also has the world's largest economy. 
 
 # Data description
 
 
-The data comes from [Bureau of Economic Analysis](https://www.bea.gov/system/files/papers/BEA-WP2020-12.pdf). The raw .xlsx file is included, or can be downloaded directly from the [BEA Working paper series](https://www.bea.gov/system/files/2021-01/infrastructure-data-may-2020.xlsx).
+The data comes from [Bureau of Economic Analysis](https://www.bea.gov/system/files/papers/BEA-WP2020-12.pdf). The raw .xlsx file is included or it can be downloaded directly from [BEA Working paper series](https://www.bea.gov/system/files/2021-01/infrastructure-data-may-2020.xlsx).
 
-The 3 primary data sets are already cleaned and saved as .csv files and they all have five variables. Of these, the four variables are the same as below.
+3 primary data sets are already cleaned and saved as .csv files and they all have five variables. Four out the variables are described below:
 
 ```{r, echo=FALSE}
 variable <- c("category","meta_cat","group_num","year")
@@ -75,7 +75,7 @@ kable(dic,
       align = "llll","pipe")
 ```
 
-The 3 data sets record the gross investment, chained investment in millions of USD and Implicit Price Deflators (IPDs) respectively.
+The 3 data sets record gross investment, chained investment (USD in millions) and Implicit Price Deflators (IPDs) respectively.
 
 ```{r, echo=FALSE}
 variable <- c("gross_inv","gross_inv_chain","gross_inv_ipd")
@@ -90,7 +90,7 @@ kable(dic2,
 
 ```
 
-The gdplev data set is downloaded from [Bureau of Economic Analysis](https://www.bea.gov/data/gdp/gross-domestic-product), which is a supplementary data set for our analysis. It records the current GDP and chain GDP in US from 1929 to 2021. Its variable contains year, GDP_current and GDP_chain whose type is all double.
+The gdplev data set is downloaded from [Bureau of Economic Analysis](https://www.bea.gov/data/gdp/gross-domestic-product), which is a supplementary data set for our analysis. It records the current GDP and chain GDP in US from 1929 to 2021. Vaariables in this dataset are *year*, *GDP_current* and *GDP_chain* whose datatype is double.
 
 - Chained dollars: Chained dollars is a method of adjusting real dollar amounts for inflation over time, to allow the comparison of figures from different years. The U.S. Department of Commerce introduced the chained-dollar measure in 1996.
 
@@ -103,56 +103,50 @@ The gdplev data set is downloaded from [Bureau of Economic Analysis](https://www
 
 3. what is the trend of total social infrastructure?
 
-4. What year and category are the highest investment and Chain?
+4. What year and category are the highest and lowest investment and Chain?
 
-5. What year and category are the lowest investment and Chain?
+5. **What is the relationship between total digital investment and GDP?** 
 
-6. **What is the relationship between total digital investment and GDP?** 
+6. What are the highest investment between Air, Water, Rail transportation investment ?
 
-7. What are the highest investment between Air, Water, Rail transportation investment ?
+7. What are the similarities/difference of trend between Federal electric power structures investment and Private electric power structures investment?
 
-8. What are the similarities/difference of trend between Federal electric power structures investment and Private electric power structures investment?
+8. How does the different type of investment change? (digital, transportation and power)
 
-9. How does the digital investment change? 
+9. What is the proportion of total social investment in all category infrastructure?
 
-10. How does the transportation investment change? 
+10. What is the proportion of total basic infrastructure investment in all category infrastructure?
 
-11. How does the power investment change? 
+11. **What is the relationship between transportation investment (chained US dollars) and GDP (chained US dollars)?**
 
-12. What is the proportion of total social investment in all category infrastructure?
+12. What are the trends in all categories infrastructure investment so far?
 
-13. What is the proportion of total basic infrastructure investment in all category infrastructure?
+13. In 2012, what is the proportion of various investments in the total investment？
 
-14. **What is the relationship between transportation investment (chained US dollars) and GDP (chained US dollars)?**
+14. What category of investment has the greatest impact on GDP and how?
 
-15. What are the trends in all categories infrastructure investment so far?
+15. **What is the relationship between GDP and private investment, federal investment？And which one is stronger impact on GDP?**
 
-16. In 2012, what is the proportion of various investments in the total investment？
+16. What is the proportion of total digital investment in all category infrastructure?
 
-17. What category of investment has the greatest impact on GDP and how?
-
-18. **What is the relationship between GDP and private investment, federal investment？And which one is stronger impact on GDP?**
-
-19. What is the proportion of total digital investment in all category infrastructure?
-
-20. **Is there a linear relationship between GDP and total basic infrastructure investment? Positive or negative?**
+17. **Is there a linear relationship between GDP and total basic infrastructure investment? Positive or negative?**
 
 # Expected findings
 
 
-In question 6: We expect the positive relationship between total data investment and GDP. Moreover we expect to see the steep line from 1900 to 2017.
+In question 5: We expect to find the positive relationship between total digital investment and GDP. Moreover we expect to see the steep line from 1900 to 2017.
 
-In question 14: We expect the positive relationship between transportation (chained US dollar) and GDP (chained US dollar), the result can explain by the linear model and high effect value to GDP.
+In question 14: We expect the positive relationship between transportation (chained US dollar) and GDP (chained US dollar). This expected finding can be explained by linear model and there will be high effect value to GDP.
 
-In question 18: We expect a strong relationship between GDP and federal investment, and both relations are positive linear relationships.
+In question 18: We expect to find a strong relationship between GDP and federal investment and there is a positive relation both sides.
 
-In question 20: We expect there is a positive linear relationship between GDP and total basic. infrastructure investment.
+In question 20: We expect to find a positive linear relationship between GDP and total basic infrastructure investment.
 
 # Analysis and findings
 
 **Methodology**
 
-This study uses the linear model to analysis because linear models are the simple and present a mathematical equation which easy to interpret and can be predictions. Moreover, the linear regression model is a reliable predictors because it is a long established statistical procedure  and the character of linear regression is easy to understand (IBM, 2022).
+This study uses the linear model to analyze because linear models are simple and present a mathematical equation which is easy to interpret and can make predictions. Moreover, linear regression model is a reliable predictor because it is a long established statistical procedure  and the character of linear regression is easy to understand. (IBM, 2022).
 
 
 **What is the relationship between total digital investment and GDP?**
@@ -218,7 +212,7 @@ q6_lm_summary %>% kable() %>%
   kable_classic(full_width = F, html_font = "Cambria")
 
 ```
-Figure \@ref(fig:q6fig1) shows the positive trend of total digital infrastructure investment, moreover, it is a steeply increasing trend between 1990 and 2017. Although overall the trend is an increasing trend, around 1999 to 2009 are a slight fluctuation. Figure \@ref(fig:q6fig3) illustrates the proportion increasing between Total digital infrastructure and GDP is 1:1. 
+Figure \@ref(fig:q6fig1) shows the positive trend of total digital infrastructure investment. Moreover, it has a steeply increasing trend from 1990 to 2017. Overall there is an increasing trend but around 1999 to 2009 there is a slight fluctuation. Figure \@ref(fig:q6fig3) illustrates the proportional increase between Total digital infrastructure and GDP which is 1:1. 
 
 The table of results can be expressed in the formula as:
 
@@ -228,9 +222,9 @@ $$
 \end{align*}
 $$
 
-This formula means if total digital infrastructure increases by 1 million US dollars, the Gross Domestic Product will increase by 112.63 million US dollars. This result is related to the study of Zhang et al. (2022) that investigated the increase of digital economy will increase the GDP by around 0.78%. Furthermore, they told it can be seen by the development of new technology such as the internet and mobile phone communication. R-squared is 95.54% of the variance and it shows a nice linear model. Therefore, the result of a relationship between total digital infrastructure and GDP can be summarised by the linear model.
+This formula means if total digital infrastructure increases by 1 million US dollars, the Gross Domestic Product will increase by 112.63 million US dollars. This result is related to the study of Zhang et al. (2022) who investigated that the increase of digital economy will increase the GDP by around 0.78%. Furthermore, he told that the increase is due to the development of new technology such as internet and mobile phone communication. R-squared is 95.54% of the variance and it shows a nice linear model. Therefore, the result of a relationship between total digital infrastructure and GDP can be summarized by the linear model.
 
-In Addition, this result same as our expected finding which is a positive relationship between total digital infrastructure and GDP. However, the trend of Total digital infrastructure has steeply increased since 1990, and GDP has steeply increased since 1980. It means total digital infrastructure doesn't significantly affect GDP from 1980 to 1990.
+In Addition, this resulted same as our expected finding which was a positive relationship between total digital infrastructure and GDP. However, the trend of Total digital infrastructure has steeply increased since 1990 and GDP's has steeply increased since 1980. It means total digital infrastructure doesn't significantly affect GDP from 1980 to 1990.
 
 
 **What is the relationship between transportation investment (chained US dollars) and GDP (chained US dollars)?**
@@ -284,7 +278,7 @@ q14_lm_summary%>% kable() %>%
 
 ```
 
-Figure \@ref(fig:q14fig4) shows the positive trend of transportation investment (chained dollar), however, it is a steeply slight fluctuation between 1968 and 1998. While Gross Domestic Product (chained dollar) is a positive trend and increases over the year. Figure \@ref(fig:q14fig5) illustrates the relationship between transportation investment (chained dollar) and GDP (chained dollar),  nonetheless, it is difficult to explain the relationship between both variables as linear. 
+Figure \@ref(fig:q14fig4) shows the positive trend of transportation investment (chained dollar), however, there is a slight steep fluctuation between 1968 and 1998. While Gross Domestic Product (chained dollar) has a positive trend and increases over the years. Figure \@ref(fig:q14fig5) illustrates the relationship between transportation investment (chained dollar) and GDP (chained dollar),  nonetheless, it is difficult to explain the relationship between both variables as linear. 
 
 The table of results can be expressed in the formula as:
 
@@ -294,7 +288,7 @@ $$
 \end{align*}
 $$
 
-This formula means if transportation investment increases by 1 million chained US dollars, the Gross Domestic Product will increase by 0.13 million chained US dollars. This result relates to the study of Weisbrod and Reno (2009) that argued the positive significance of the relationship between transportation investment and GDP. Moreover, transportation investment has a positive effect on economic growth (Lin, 2020). R-squared is 67.39% of the variance. Therefore, the result of the relationship between transportation investment (chained dollar) and Gross Domestic Product (chained dollar) should not summary by a linear model, or this formula has omitted variables. 
+This formula means if transportation investment increases by 1 million chained US dollars, the Gross Domestic Product will increase by 0.13 million chained US dollars. This result relates to the study of Weisbrod and Reno (2009) that argued the positive significance of the relationship between transportation investment and GDP. Moreover, transportation investment has a positive effect on economic growth (Lin, 2020). R-squared is 67.39% of the variance. Therefore, the result of the relationship between transportation investment (chained dollar) and Gross Domestic Product (chained dollar) should not summarize by a linear model or this formula has omitted variables. 
 
 This result same as our expected finding that is a positive relationship between transportation investment (chained dollar) and Gross Domestic Product (chained dollar). However, this relationship can not explain by the linear model and the coefficient is too low which is not the same as our expected finding.
 
@@ -352,9 +346,9 @@ g2 <- ggplotRegression(lm(GDP_current ~ gross_inv,data = q18_F)) +
 grid.arrange(g1,g2,nrow = 1)
 ```
 
-Figure \@ref(fig:q18fig6) illustrates the current GDP has a generally increasing trend over time, and the trend of gross private investment is similar to that. While the gross federal investment has fluctuated since around 1980 Figure 9.
+Figure \@ref(fig:q18fig6) illustrates that the current GDP is generally increasing over time, and the trend of gross private investment is similar to that. While the gross federal investment is fluctuating since 1980 Figure 9.
 
-By observing the trends of the three variables, this study predicts the current GDP and the other two might have a linear relationship, then we use a linear model to judge whether they have a linear relationship. As a result, GDP does have a linear relationship with private investment and federal investment respectively, and private investment has a stronger impact on current GDP.
+By observing the trends of the three variables, this study predicts the current GDP and the other two might have a linear relationship, then we use the linear model to judge whether they have a linear relationship. As a result, GDP does have a linear relationship with private investment and federal investment respectively, and private investment has a stronger impact on current GDP.
 
 R-squared is an important statistical measure that represents the proportion of the variance for current GDP that is explained by the gross private and federal investment in the regression model. For example, Figure \@ref(fig:q18fig7) shows that 98.6% of private investment can explain the current GDP, rather only 78.1% of federal investment can explain that. Obviously, there is a stronger linear relationship between GDP and private investment which is unexpected. This result relates to the study of Private investment as the engine of economic growth and social welfare that investigated the private investment can explain the variance of GDP growth rate more than public investment (Doménech & Sicilia, 2021).
 
@@ -391,7 +385,7 @@ $$
 \end{align*}
 $$
 
-This formula means if transportation investment increases by 1 million US dollars, the Gross Domestic Product will increase by 59.02  million US dollars. Moreover, the distribution of data has a positive linear relationship in figure \@ref(fig:q20fig8). The trend is increasing because the infrastructure investment effect increases a huge stock of public capital such as developing or creating new roads. That is a direct effect to increase government spending (G) in the GDP formula (Stupak, 2017).  Furthermore, Gunnion (2021) claims that investment in infrastructure is a positive impact on economic output. R-squared is 98.67% of the variance, therefore, the result of the relationship between total basic infrastructure investment and Gross Domestic Product can summary by the linear model. 
+This formula means if transportation investment increases by 1 million US dollars, the Gross Domestic Product will increase by 59.02  million US dollars. Moreover, the distribution of data has a positive linear relationship in figure \@ref(fig:q20fig8). The trend is increasing because the infrastructure investment effect increases a huge stock of public capital such as developing or creating new roads. That is a direct effect to increase government spending (G) in the GDP formula (Stupak, 2017).  Furthermore, Gunnion (2021) claims that investment in infrastructure has a positive impact on economic output. R-squared is 98.67% of the variance, therefore, the result of the relationship between total basic infrastructure investment and Gross Domestic Product can summarized by the linear model. 
 
 Additionally, these results can confirm the expected finding is correct by the graph, the result of regression, and R-square.
 
