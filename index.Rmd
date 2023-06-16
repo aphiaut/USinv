@@ -56,7 +56,7 @@ Infrastructure investment is an important part of the country. It includes feder
 
 Moreover, infrastructure investment plays a role in supporting both businesses and households. For example, the development of logistics in business sector has resulted in reduction of transportation cost. Households can access infrastructure services and can choose what and how to use. It also has a positive affect on both short-term and long-term economic growth. [(Stupak, 2017)](https://ecommons.cornell.edu/bitstream/handle/1813/78289/CRS_Economic_Impact_of_Infrastructure_Investment_0717.pdf?sequence=1&isAllowed=y)
 
-As mentioned above, the case study should be of USA's infrastructure because USA is a big country. It has large population, and people can access infrastructure services easily. Furthermore, USA also has the world's largest economy. 
+As mentioned above, the case study should be of USA's infrastructure because USA is a big country. It has large population, and people can access infrastructure services easily. Furthermore, USA also has the world's largest economy.
 
 # Data description
 
@@ -65,7 +65,7 @@ The data comes from [Bureau of Economic Analysis](https://www.bea.gov/system/fil
 
 There are 3 primary data sets are already cleaned and saved as .csv files and they all have five variables.
 
-**For investment dataset-**
+**For investment dataset**
 
 ```{r, echo=FALSE}
 tibble(
@@ -82,7 +82,7 @@ tibble(
   datatable()
 ```
 
-**For Chain Investment-**
+**For Chain Investment**
 
 ```{r}
 tibble(
@@ -99,7 +99,7 @@ tibble(
   datatable()
 ```
 
-**For IPD (Implicit Price Deflators) -** 
+**For IPD (Implicit Price Deflators)** 
 
 ```{r}
 tibble(
@@ -173,8 +173,6 @@ tibble(
 16. What is the proportion of total digital investment in all category infrastructure?
 
 17. **Is there a linear relationship between GDP and total basic infrastructure investment? Positive or negative?**
-
-### **NEW QUESTIONS OF INTEREST**
 
 18. **How each category is changed under Transportation from 2000 to 2017?**
 
@@ -475,7 +473,6 @@ This formula means if transportation investment increases by 1 million US dollar
 Additionally, these results can confirm the expected finding is correct by the graph, the result of regression, and R-square.
 
 
-## Additional Analysis
 
 **QUESTION-18 How each category is changed under Transportation from 2000 to 2017?**
 
